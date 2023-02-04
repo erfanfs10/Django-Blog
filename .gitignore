@@ -1,0 +1,6 @@
+local_*.py
+*.sqlite3
+*.pyc
+.idea/
+.vscode/
+

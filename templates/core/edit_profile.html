@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+
+<br>
+<br>
+<h4><a href="{% url 'home' %}" >back to home page</a></h4>
+<br>
+<br>
+<br>
+<br>
+
+<a class="btn btn-danger" href="{% url 'delete-image' %}"> Delete Image </a>
+<form method="post" enctype="multipart/form-data">
+
+    {% csrf_token %}
+    {{ form | crispy }}
+    <button type="submit" class="btn btn-primary">edit</button>
+
+</form>
+
+{% endblock %}
+{% block side %}
+    {% include 'side.html' %}
+{% endblock %}

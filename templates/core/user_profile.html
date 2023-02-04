@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<br>
+<br>
+<h4><a href="{% url 'home' %}" >back to home</a></h4>
+<h3>{{pro.user}}'s  profile</h3>
+<img src="{{pro.user.profile.image.url}}" style="width: 200px; height: 200px; border-radius: 100px;" >
+<h3>Bio : {{pro.user.profile.bio}}</h3>
+<div class="row g-4 py-5 row-cols-1 row-cols-lg-3">
+    {% for post in posts %}
+
+        <div class="feature col">
+            <div class="feature-icon d-inline-flex align-items-center justify-content-center  bg-gradient fs-2 mb-3">
+                
+                <img src="{{ post.user.profile.image.url }}" style="width:80px; height: 80px; border-radius: 100px;" > &nbsp; <h5><a href="">@{{post.user}}</a></h5>
+                
+            </div>
+            <h3 class="fs-4">{{post.title}}</h3>
+            <p>{{ post.body| truncatewords:25 | title}}</p>
+            <a href="#" class="icon-link d-inline-flex align-items-center">
+            See More
+            <br>
+            </a>
+                        
+            {% if like is None %}
+
+            <h5 style="color: darkgreen;"> likes {{post.like}} &nbsp;<a href="{% url 'login' %}"> login first  </a> </h5>
+  
+            {%elif post.id in like%}
+
+            <h5 style="color: darkgreen;"> likes {{post.like}} &nbsp; &nbsp; <a href="{% url 'dislike' post.id %}"> <img src="{% static 'like.png' %}" style="width: 25px; height: 25px;" > </a> </h5>
+
+            {%else%}
+
+            <h5 style="color: darkgreen;"> likes {{post.like}} &nbsp; &nbsp; <a href="{% url 'like' post.id%}"> <img src="{% static 'dislike.png' %}" style="width: 25px; height: 25px;" > </a> </h5>
+
+            {%endif%}
+           
+            <h7>{{post.created_time|timesince}}&nbsp;ago</h7>
+      </div>
+
+    
+    {% endfor %}    
+</div>    
+        
+
+{% endblock %}
+{% block side %}
+  {% include 'side.html' %}
+{% endblock %}

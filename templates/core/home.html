@@ -1,0 +1,94 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+<br>
+<div style="display: inline-block;">
+    <div style="display: inline-block; margin-right: 10px;">
+        <h3>Home Page</h3> 
+    </div>
+    <div style="display: inline-block; margin-right: 10px;">
+
+        <form class="d-flex" role="search">
+            <input name="q" class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+          </form>
+
+    </div>
+    <div style="display: inline-block; margin-right: 10px;">
+        <h5><a href="?q=like" >sort by like</a></h5>  
+    </div>
+    <div style="display: inline-block; margin-right: 10px;">
+        <h5><a href="?q=new" >sort by newest</a></h5> 
+    </div>
+</div>
+
+<div class="row g-4 py-5 row-cols-1 row-cols-lg-3">
+    {% for post in posts %}
+
+        <div class="feature col">
+            <div class="feature-icon d-inline-flex align-items-center justify-content-center  bg-gradient fs-2 mb-3">
+                {% if post.user == request.user %}
+                <img src="{{ post.user.profile.image.url }}" style="width:80px; height: 80px; border-radius: 100px;" > &nbsp; <h5><a>@{{post.user}}</a></h5>
+                {% else %}
+                <img src="{{ post.user.profile.image.url }}"  style="width:80px; height: 80px; border-radius: 100px;" > &nbsp; <h5><a href="{% url 'user-profile' post.user.id%}">@{{post.user}}</a></h5>
+                {% endif %}
+            </div>
+            <h3 class="fs-4">{{post.title}}</h3>
+            <p>{{ post.body| truncatewords:20 | title}}</p>
+            <a href="{% url 'post-view' post.id%}" class="icon-link d-inline-flex align-items-center">
+            See More
+            <br>
+            </a>
+                        
+            {% if like is None %}
+
+            <h5 style="color: darkgreen;"> likes {{post.like}} &nbsp;<a href="{% url 'login' %}"> login first </a> </h5>
+  
+            {%elif post.id in like%}
+
+            <h5 style="color: darkgreen;"> likes {{post.like}} &nbsp; &nbsp;&nbsp; &nbsp; <a href="{% url 'dislike' post.id %}"> <img src="{% static 'like.png' %}" style="width: 25px; height: 25px;" > </a> </h5>
+            
+            {%else%}
+
+            <h5 style="color: darkgreen;"> likes {{post.like}} &nbsp; &nbsp;&nbsp; &nbsp; <a href="{% url 'like' post.id%}"> <img src="{% static 'dislike.png' %}" style="width: 25px; height: 25px;" > </a> </h5>
+
+            {%endif%}
+           
+            <h6>{{post.created_time|timesince}}&nbsp;ago</h6>
+      </div>
+    {% empty %}  
+        <h4>There is no post yet!</h4>
+    {% endfor %}    
+</div>    
+
+<nav aria-label="Another pagination example">
+    <ul class="pagination pagination-lg flex-wrap">
+
+        {% if posts.has_previous %}
+            <li class="page-item"> <a class="page-link" href="?page=1">First</a></li>
+            <li class="page-item"> <a class="page-link" href="?page={{ posts.previous_page_number }}">previous</a> </li> 
+        {% endif %}
+
+        {% for num in posts.paginator.page_range %}
+
+            {% if posts.number == num  %}
+            <li class="page-item active" aria-current="page"> <a class="page-link" href="?page={{ num }}">{{ num }}</a></li>
+            {% elif num > posts.number|add:'-2' and num < posts.number|add:'2' %}
+            <li class="page-item"> <a class="page-link"  href="?page={{ num }}">{{ num }}</a> </li>
+            {% endif %}
+
+            {% endfor %}
+
+        {% if posts.has_next %}
+            <li class="page-item"> <a class="page-link"  href="?page={{ posts.next_page_number }}">next</a> </li>
+            <li class="page-item"> <a class="page-link"  href="?page={{ posts.paginator.num_pages }}">last </a> </li>
+        {% endif %}
+
+    </ul>
+</nav>
+
+{% endblock %}
+{% block side %}
+    {% include 'side.html' %}
+{% endblock %}
+
