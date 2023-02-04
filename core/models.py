@@ -12,7 +12,7 @@ class Profile(models.Model):
     updated_time = models.DateTimeField(auto_now=True)
 
     def __str__(self):
-        return self.user
+        return str(self.user)
 
 
 class Post(models.Model):
