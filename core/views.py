@@ -26,10 +26,7 @@ def home(request):
 
     if request.user.is_authenticated:
 
-        li = Like.objects.filter(user=request.user)
-        like = []
-        for i in li:
-            like.append(i.post.id)
+        like = Like.objects.filter(user=request.user).values_list('post_id', flat=True)
     else:        
         like = None
 
@@ -80,10 +77,7 @@ def post_like(request):
     page_number = request.GET.get('page') if request.GET.get('page') is not None else ''
     page_obj = paginator.get_page(page_number)
 
-    li = Like.objects.filter(user=request.user)
-    like = []
-    for i in li:
-        like.append(i.post.id)
+    like = Like.objects.filter(user=request.user).values_list('post_id', flat=True)
 
     return render(request, 'core/post_like.html', {'posts': page_obj, 'like': like})
 
@@ -98,10 +92,7 @@ def your_post(request):
     page_number = request.GET.get('page') if request.GET.get('page') is not None else ''
     page_obj = paginator.get_page(page_number)
 
-    li = Like.objects.filter(user=request.user)
-    like = []
-    for i in li:
-        like.append(i.post.id)
+    like = Like.objects.filter(user=request.user).values_list('post_id', flat=True)
 
     context = {
         'posts': page_obj,
@@ -166,10 +157,7 @@ def user_profile(request, userid):
 
     if request.user.is_authenticated:
 
-        li = Like.objects.filter(user=request.user).select_related('post')
-        like = []
-        for i in li:
-            like.append(i.post.id)
+        like = Like.objects.filter(user=request.user).values_list('post_id', flat=True)
     else:        
         like = None
 
