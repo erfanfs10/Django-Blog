@@ -11,21 +11,22 @@ def home(request):
     q = request.GET.get('q').lower() if request.GET.get('q') is not None else ''
     
     if q == '':
-        posts = Post.objects.annotate(like=Count('likess__id')).all().order_by( '-updated_time', '-created_time')
+        posts = Post.objects.select_related('user', 'user__profile').annotate(like=Count('likess__id')).all().order_by( '-updated_time', '-created_time')
     elif q == 'new':
-        posts = Post.objects.annotate(like=Count('likess__id')).all().order_by('-created_time')
+        posts = Post.objects.select_related('user', 'user__profile').annotate(like=Count('likess__id')).all().order_by('-created_time')
     elif q == 'like':
-        posts = Post.objects.annotate(like=Count('likess__id')).all().order_by('-like')
+        posts = Post.objects.select_related('user', 'user__profile').annotate(like=Count('likess__id')).all().order_by('-like')
     else:
-        posts = Post.objects.annotate(like=Count('likess__id')).filter( Q(title__icontains=q) | Q(user__username__icontains=q) )
+        posts = Post.objects.select_related('user', 'user__profile').annotate(like=Count('likess__id')).filter( Q(title__icontains=q) | Q(user__username__icontains=q) )
+    
 
-    paginator = Paginator(posts, 6) # Show 25 contacts per page.
+    paginator = Paginator(posts, 6) 
 
     page_number = request.GET.get('page') if request.GET.get('page') is not None else ''
     page_obj = paginator.get_page(page_number)
 
     if request.user.is_authenticated:
-
+    
         like = Like.objects.filter(user=request.user).values_list('post_id', flat=True)
     else:        
         like = None
@@ -70,9 +71,12 @@ def add_post(request):
 @login_required(login_url='login')
 def post_like(request):
 
-    posts = Post.objects.annotate(like=Count('likess__id')).filter(likess__user = request.user)
+    # posts = Like.objects.select_related('post').filter(user=request.user)
+
+    posts = Post.objects.select_related('user__profile').prefetch_related('likess').annotate(like=Count('likess__id')).filter(likess__user = request.user)
     
-    paginator = Paginator(posts, 6) # Show 6 contacts per page.
+
+    paginator = Paginator(posts, 6) # Show 25 contacts per page.
 
     page_number = request.GET.get('page') if request.GET.get('page') is not None else ''
     page_obj = paginator.get_page(page_number)
@@ -85,9 +89,9 @@ def post_like(request):
 @login_required(login_url='login')
 def your_post(request):
 
-    posts = Post.objects.annotate(like=Count('likess__id')).filter(user=request.user)
+    posts = Post.objects.select_related('user__profile').prefetch_related('likess').annotate(like=Count('likess__id')).filter(user=request.user)
     
-    paginator = Paginator(posts, 6) # Show 6 contacts per page.
+    paginator = Paginator(posts, 6) # Show 25 contacts per page.
 
     page_number = request.GET.get('page') if request.GET.get('page') is not None else ''
     page_obj = paginator.get_page(page_number)
@@ -117,7 +121,6 @@ def update_post(request, postid):
             return redirect('your-post')
    
     else:
-        
         form = PostForm(instance=post)
 
     return render(request, 'core/update_post.html', {'form': form})        
@@ -152,7 +155,7 @@ def edit_profile(request):
 
 def user_profile(request, userid):
 
-    posts = Post.objects.annotate(like=Count('likess__id')).filter(user=userid)
+    posts = Post.objects.select_related('user__profile').annotate(like=Count('likess__id')).filter(user=userid)
     pro = posts.first()
 
     if request.user.is_authenticated:
