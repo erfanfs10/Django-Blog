@@ -4,3 +4,4 @@ local_*.py
 .idea/
 .vscode/
 media/profile/*.png
+media/profile/*.jpeg
