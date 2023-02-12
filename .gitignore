@@ -3,4 +3,4 @@ local_*.py
 *.pyc
 .idea/
 .vscode/
-
+media/profile/*.png
