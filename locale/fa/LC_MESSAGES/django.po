@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-02-13 12:52+0000\n"
+"POT-Creation-Date: 2023-02-13 20:14+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -30,14 +30,18 @@ msgstr ""
 msgid "French"
 msgstr ""
 
-#: core/models.py:41
+#: core/models.py:52
 msgid "like"
 msgstr "پسندیده"
 
-#: core/models.py:42
+#: core/models.py:53
 msgid "likes"
 msgstr "پسندیده ها"
 
 #: templates/core/home.html:58
 msgid "ago"
 msgstr "پیش"
+
+#: templates/side.html:29
+msgid "Back to home"
+msgstr "برگشت به خانه"
