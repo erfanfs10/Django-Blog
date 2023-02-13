@@ -11,13 +11,13 @@ def home(request):
     q = request.GET.get('q').lower() if request.GET.get('q') is not None else ''
     
     if q == '':
-        posts = Post.objects.select_related('user', 'user__profile').annotate(like=Count('likess__id')).all().order_by( '-updated_time', '-created_time')
+        posts = Post.objects.select_related('user__profile').annotate(like=Count('likess__id')).all().order_by( '-updated_time', '-created_time')
     elif q == 'new':
-        posts = Post.objects.select_related('user', 'user__profile').annotate(like=Count('likess__id')).all().order_by('-created_time')
+        posts = Post.objects.select_related('user__profile').annotate(like=Count('likess__id')).all().order_by('-created_time')
     elif q == 'like':
-        posts = Post.objects.select_related('user', 'user__profile').annotate(like=Count('likess__id')).all().order_by('-like')
+        posts = Post.objects.select_related('user__profile').annotate(like=Count('likess__id')).all().order_by('-like')
     else:
-        posts = Post.objects.select_related('user', 'user__profile').annotate(like=Count('likess__id')).filter( Q(title__icontains=q) | Q(user__username__icontains=q) )
+        posts = Post.objects.select_related('user__profile').annotate(like=Count('likess__id')).filter( Q(title__icontains=q) | Q(user__username__icontains=q) )
     
 
     paginator = Paginator(posts, 6) 
