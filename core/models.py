@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
 from django.utils.translation import gettext_lazy as _
+from PIL import Image
 
 class Profile(models.Model):
 
@@ -14,7 +15,15 @@ class Profile(models.Model):
     def __str__(self):
         return str(self.user)
 
-
+    def save(self):
+        super().save()
+        with Image.open(self.image.path) as im:
+            if im.width > 300 or im.height > 300:
+                output = (300, 300)
+                im.thumbnail(output)
+                im.save(self.image.path)
+   
+   
 class Post(models.Model):
 
     user = models.ForeignKey(User, on_delete=models.CASCADE, null=True, related_name='posts')
