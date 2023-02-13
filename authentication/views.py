@@ -33,15 +33,16 @@ def register_view(request):
 
     if request.method == 'POST':
         form = UserCreationForm(request.POST)
+
         if form.is_valid():
+
             user = form.save(commit=False)
             form.save()
             messages.success(request, f'registration was successfull welcome {user.username}')
-            login(request, user)
-        
-            Profile.objects.create(user=user)
 
+            login(request, user)
             return redirect('home')
+        
     else:
         form = UserCreationForm()
 

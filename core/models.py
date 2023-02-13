@@ -15,15 +15,17 @@ class Profile(models.Model):
     def __str__(self):
         return str(self.user)
 
-    def save(self):
-        super().save()
-        with Image.open(self.image.path) as im:
-            if im.width > 300 or im.height > 300:
-                output = (300, 300)
-                im.thumbnail(output)
-                im.save(self.image.path)
-   
-   
+    def save(self, *args, **kwargs):
+        super().save(*args, **kwargs)
+
+        if self.image:
+            with Image.open(self.image.path) as im:
+                if im.width > 300 or im.height > 300:
+                    output = (300, 300)
+                    im.thumbnail(output)
+                    im.save(self.image.path)
+    
+    
 class Post(models.Model):
 
     user = models.ForeignKey(User, on_delete=models.CASCADE, null=True, related_name='posts')

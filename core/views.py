@@ -1,8 +1,8 @@
 from django.shortcuts import render, redirect
 from django.db.models import Count, Q
 from django.contrib.auth.decorators import login_required
-from .models import Post, Like, Profile
-from .forms import PostForm, ProfileForm
+from core.models import Post, Like, Profile
+from core.forms import PostForm, ProfileForm
 from django.core.paginator import Paginator
 
 
@@ -145,7 +145,9 @@ def edit_profile(request):
         if form.is_valid():
             form.save()
             return redirect('home')
+        
     else:
+
         form = ProfileForm(instance=request.user.profile)
 
     return render(request, 'core/edit_profile.html', {'form': form})
