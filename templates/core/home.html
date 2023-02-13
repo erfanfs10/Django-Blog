@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 {% load static %}
+{% load i18n %}
 {% block content %}
 
 <br>
@@ -54,7 +55,7 @@
 
             {%endif%}
            
-            <h6>{{post.created_time|timesince}}&nbsp;ago</h6>
+            <h6>{{post.created_time|timesince}}&nbsp;{% translate "ago" %}</h6>
       </div>
     {% empty %}  
         <h4>There is no post yet!</h4>

@@ -1,4 +1,4 @@
-from django.urls import path
+from django.urls import path, include
 from .views import (home, like, dislike,
                     add_post, update_post,
                     post_like, your_post,
@@ -20,5 +20,5 @@ urlpatterns = [
     path('edit_prifile/', edit_profile, name='edit-profile'),
     path('user_profile/<int:userid>/', user_profile, name='user-profile') ,
     path('post_view/<int:postid>/', post_view, name='post-view'),
-    path('delete_image', delete_image, name='delete-image')
+    path('delete_image', delete_image, name='delete-image'),
 ]

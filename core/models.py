@@ -1,6 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
-
+from django.utils.translation import gettext_lazy as _
 
 class Profile(models.Model):
 
@@ -37,3 +37,6 @@ class Like(models.Model):
     def __str__(self):
         return f"{self.user.username}--{self.post.title}"
     
+    class Meta:
+        verbose_name = _('like')
+        verbose_name_plural = _('likes')
