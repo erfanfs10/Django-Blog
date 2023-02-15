@@ -117,7 +117,6 @@ LANGUAGE_CODE = 'en-us'
 LANGUAGES = (
     ("fa", _("Persian")),
     ('en', _('English')),
-    ('fr', _('French'))
 )
 
 TIME_ZONE = 'UTC'

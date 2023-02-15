@@ -2,29 +2,27 @@
     <div class="position-sticky" style="top: 2rem;">
       {% if request.user.is_authenticated %}
         <div class="col-lg-7">
-          <h3>Your Porfile</h3>
+          <h3>{% translate 'Your Porfile' %}</h3>
           
           <img src="{{ request.user.profile.image.url }}" style="width:100px; height: 100px; border-radius: 100px;" >
           
-          <h5>UserName: &nbsp; @{{request.user}}</h5>
-          {% if request.user.profile.bio %}
-            <h6>Bio: &nbsp; {{ request.user.profile.bio }}</h6>
-          {%else%}  
-            <h6>Bio: </h6>
-          {%endif%}
-          <a class="btn btn-primary" href="{% url 'edit-profile' %}">Edit Profile</a> <a class="btn btn-danger" href="{% url 'logout' %}"> Logout </a> 
+          <h5>{% translate 'UserName' %}: &nbsp; @{{request.user}}</h5>
+          
+          <h6>{% translate 'Bio'%}: &nbsp;{% if request.user.profile.bio %}{{ request.user.profile.bio }}{% else %}{% endif %}</h6>
+         
+          <a class="btn btn-primary" href="{% url 'edit-profile' %}">{% translate 'Edit Profile' %}</a> <a class="btn btn-danger" href="{% url 'logout' %}"> {% translate 'Logout' %} </a> 
         </div><!-- /.col-lg-4 -->
       {% else %}
-        <h3>Your Porfile</h3>
-        <h4>you need to <a href="{% url 'login' %}" >login</a></h4> 
+        <h3>{% translate 'Your Porfile' %}</h3>
+        <h4>{% translate 'you need to' %} <a href="{% url 'login' %}" >{% translate 'login' %}</a></h4> 
       {% endif %}  
        
         <div class="p-4">
-          <h4 class="fst-italic">Posts</h4>
+          <h4 class="fst-italic">{% translate 'Posts' %}</h4>
           <ol class="list-unstyled">
-            <li><a href="{% url 'add-post' %}">Add New Post</a></li>
-            <li><a href="{% url 'your-post' %}">Show My Posts</a></li>
-            <li><a href="{% url 'post-like' %}">Show Post That I Liked</a></li>
+            <li><a href="{% url 'add-post' %}">{% translate 'Add New Post' %}</a></li>
+            <li><a href="{% url 'your-post' %}">{% translate 'Show My Posts' %}</a></li>
+            <li><a href="{% url 'post-like' %}">{% translate 'Show Post That I Liked' %}</a></li>
             <br>
             <li><a href="{% url 'home' %}">{% translate 'Back to home' %}</a></li>
           </ol>
@@ -43,11 +41,10 @@
                   </option>
               {% endfor %}
           </select>
-          <input type="submit" value="Go">
+          <input type="submit" value="{% translate 'Go' %}">
         </form>
         <br>
-        <h6>currnet language: {{LANGUAGE_CODE|language_name}}</h6>
-        
+        <h6>{% blocktranslate with lan=LANGUAGE_CODE|language_name_local %} currnet language : {{lan}} {% endblocktranslate %}</h6>
       </div>
 
 

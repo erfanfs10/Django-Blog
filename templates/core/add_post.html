@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 {% load crispy_forms_tags %}
+{% load i18n %}
 
 
 {% block content %}
@@ -10,7 +11,7 @@
     <form method="post">
         {% csrf_token %}
         {{form | crispy}}
-        <button type="submit" class="btn btn-primary">add</button>
+        <button type="submit" class="btn btn-primary"> {% translate 'add' %} </button>
     </form>
 
 {% endblock %}

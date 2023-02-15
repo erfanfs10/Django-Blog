@@ -1,10 +1,11 @@
 {% extends 'base.html' %}
 {% load static %}
+{% load i18n %}
 {% block content %}
 <br>
-<h4>Your Posts</h4> <h4><a href="{% url 'home' %}" >back to home</a></h4>
+<h4>{% translate 'Your Posts' %}</h4> <h4><a href="{% url 'home' %}" >{% translate 'back to home' %}</a></h4>
 <br>
-<h5> you have {{p.count}} posts</h5>
+<h5>{% blocktranslate with count=posts.count %} you have {{count}} posts {% endblocktranslate %}</h5>
 <div class="row g-4 py-5 row-cols-1 row-cols-lg-3">
     
     {% for post in posts %}
@@ -18,50 +19,25 @@
             <h3 class="fs-4">{{post.title}}</h3>
             <p>{{ post.body| truncatewords:25}}</p>
             <a href="#" class="icon-link d-inline-flex align-items-center">
-            See More
+              {% translate 'See More' %}
             <br>
             </a>
                         
                         
             {%if post.id in like%}
-            <h5 style="color: darkgreen;"> likes {{post.likess.all.count}} &nbsp; &nbsp; <a href="{% url 'dislike' post.id %}"> <img src="{% static 'like.png' %}" style="width: 25px; height: 25px;" > </a> </h5>
+            <h5 style="color: darkgreen;"> {% translate 'likes' %} {{post.likess.all.count}} &nbsp; &nbsp; <a href="{% url 'dislike' post.id %}"> <img src="{% static 'like.png' %}" style="width: 25px; height: 25px;" > </a> </h5>
             {%else%}
-            <h5 style="color: darkgreen;"> likes {{post.likess.all.count}} &nbsp; &nbsp; <a href="{% url 'like' post.id%}"> <img src="{% static 'dislike.png' %}" style="width: 25px; height: 25px;" > </a> </h5>
+            <h5 style="color: darkgreen;"> {% translate 'likes' %} {{post.likess.all.count}} &nbsp; &nbsp; <a href="{% url 'like' post.id%}"> <img src="{% static 'dislike.png' %}" style="width: 25px; height: 25px;" > </a> </h5>
             {%endif%}
-            <h7>{{post.created_time|timesince}}&nbsp;ago</h7>
-            <h6> <a href="{% url 'update-post' post.id%}">Update you post</a></h6>
-            <h6> <a href="{% url 'delete-post' post.id %}" style="color: crimson;" >Delete your post</a> </h6>
+            <h7>{{post.created_time|timesince}}&nbsp;{% translate 'ago' %}</h7>
+            <h6> <a href="{% url 'update-post' post.id%}">{% translate 'Update you post' %}</a></h6>
+            <h6> <a href="{% url 'delete-post' post.id %}" style="color: crimson;" >{% translate 'Delete your post' %}</a> </h6>
       </div>
     {% empty %}
-      <h4>You Don't have any post yet  <a href="{% url 'add-post' %}" >Add New One</a></h4>
+      <h4>{% translate "you Don't have any post yet " %} <a href="{% url 'add-post' %}" >{% translate 'Add New One' %}</a></h4>
     {% endfor %}    
 </div>    
 
-<nav aria-label="Another pagination example">
-  <ul class="pagination pagination-lg flex-wrap">
-
-      {% if posts.has_previous %}
-          <li class="page-item"> <a class="page-link" href="?page=1">First</a></li>
-          <li class="page-item"> <a class="page-link" href="?page={{ posts.previous_page_number }}">previous</a> </li> 
-      {% endif %}
-
-      {% for num in posts.paginator.page_range %}
-
-          {% if posts.number == num  %}
-          <li class="page-item active" aria-current="page"> <a class="page-link" href="?page={{ num }}">{{ num }}</a></li>
-          {% elif num > posts.number|add:'-2' and num < posts.number|add:'2' %}
-          <li class="page-item"> <a class="page-link"  href="?page={{ num }}">{{ num }}</a> </li>
-          {% endif %}
-
-          {% endfor %}
-
-      {% if posts.has_next %}
-          <li class="page-item"> <a class="page-link"  href="?page={{ posts.next_page_number }}">next</a> </li>
-          <li class="page-item"> <a class="page-link"  href="?page={{ posts.paginator.num_pages }}">last </a> </li>
-      {% endif %}
-
-  </ul>
-</nav>
 
 {% endblock %}
 {% block side %}

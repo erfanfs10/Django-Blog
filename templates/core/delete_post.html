@@ -1,11 +1,12 @@
 {% extends 'base.html' %}
+{% load i18n %}
 
 {% block content %}
 <form method="post" >
 
     {% csrf_token %}
-    <h3>are you sure you want delete your post?</h3>
-    <button type="submit" class="btn btn-danger">delete</button>
+    <h3>{% blocktranslate %}are you sure you want delete your post?{% endblocktranslate %}</h3>
+    <button type="submit" class="btn btn-danger">{% translate 'delete' %}</button>
 
 </form>
 {% endblock %}

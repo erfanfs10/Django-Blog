@@ -5,12 +5,17 @@ from PIL import Image
 
 class Profile(models.Model):
 
-    user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='profile')
-    bio = models.CharField(max_length=255, null=True, blank=True)
-    image = models.ImageField(default='def.png', upload_to='profile')
+    user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='profile', verbose_name=_('user'))
+    bio = models.CharField(max_length=255, null=True, blank=True, verbose_name=_('bio'))
+    image = models.ImageField(default='def.png', upload_to='profile', verbose_name=_('image'))
 
     created_time = models.DateTimeField(auto_now_add=True)
     updated_time = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        verbose_name = _('profile')
+        verbose_name_plural = _('profiles')
+
 
     def __str__(self):
         return str(self.user)
@@ -28,13 +33,16 @@ class Profile(models.Model):
     
 class Post(models.Model):
 
-    user = models.ForeignKey(User, on_delete=models.CASCADE, null=True, related_name='posts')
-    title = models.CharField(max_length=255)
-    body = models.TextField()
+    user = models.ForeignKey(User, on_delete=models.CASCADE, null=True, related_name='posts', verbose_name=_('user'))
+    title = models.CharField(max_length=255, verbose_name=_('title'))
+    body = models.TextField(verbose_name=_('content'))
    
     created_time = models.DateTimeField(auto_now_add=True)
     updated_time = models.DateTimeField(auto_now=True)
 
+    class Meta:
+        verbose_name = _('post')
+        verbose_name_plural = _('posts')
 
     def __str__(self):
         return f'{self.user}--{self.title}--'
@@ -42,8 +50,8 @@ class Post(models.Model):
 
 class Like(models.Model):
 
-    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='likes')
-    post = models.ForeignKey(Post, on_delete=models.CASCADE, related_name='likess')
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='likes', verbose_name=_('user'))
+    post = models.ForeignKey(Post, on_delete=models.CASCADE, related_name='likess', verbose_name=_('post'))
 
     def __str__(self):
         return f"{self.user.username}--{self.post.title}"

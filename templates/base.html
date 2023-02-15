@@ -2,6 +2,7 @@
 <html lang="en">
   <head>
     {% load static %}
+    {% load i18n %}
     <meta charset="UTF-8">
     <title></title>
     <meta name="description" content="">
@@ -22,7 +23,7 @@
       {% for message in messages %}
 
       <div class="alert alert-{{message.tags}}" role="alert">
-        <strong>{{message}}</strong>
+        <strong>{% blocktranslate %} {{message}} {% endblocktranslate %}</strong>
         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
       </div>
 

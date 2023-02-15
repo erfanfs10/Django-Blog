@@ -1,14 +1,15 @@
 {% extends 'base.html' %}
+{% load i18n %}
 
 {% block content %}
 
 <form method="post" >
 
     {% csrf_token %}
-    <h3>are you sure you want to logout?</h3>
-    <button type="submit" class="btn btn-danger">logout</button>
+    <h3>{% translate 'are you sure you want to logout?' %}</h3>
+    <button type="submit" class="btn btn-danger">{% translate 'logout' %}</button>
 
-    <h3> <a href="{% url 'home' %}" >back to home</a> </h3>
+    <h3> <a href="{% url 'home' %}" >{% translate 'back to home' %}</a> </h3>
 
 </form>
 

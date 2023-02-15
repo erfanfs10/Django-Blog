@@ -1,5 +1,7 @@
 {% extends 'base.html' %}
 {% load crispy_forms_tags %}
+{% load i18n %}
+
 {% block content %}
 
 
@@ -10,14 +12,14 @@
                 {% csrf_token %}
                 {{form | crispy}}
             
-                <button type="submit" class="btn btn-primary">register</button>
+                <button type="submit" class="btn btn-primary">{% translate 'register' %}</button>
 
 
             </form>
-            <h5>already have an account? <a href="{% url 'login'%}" >login</a></h5>
+            <h5>{% translate 'already have an account?' %} <a href="{% url 'login'%}" >{% translate 'login' %}</a></h5>
 
     {% else %}
-        <h5>you've already have an account do you like to <a href="{% url 'logout'%}" >logout?</a></h5>
+        <h5>{% translate "you've already have an account do you like to" %} <a href="{% url 'logout'%}" >{% translate 'logout?' %}</a></h5>
     {% endif %}
   
 {% endblock %}

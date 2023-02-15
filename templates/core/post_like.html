@@ -1,8 +1,9 @@
 {% extends 'base.html' %}
 {% load static %}
+{% load i18n %}
 {% block content %}
 <br>
-<h4>posts that you liked</h4> <h4><a href="{% url 'home' %}" >back to home</a></h4>
+<h4>{% translate 'posts that you liked' %}</h4> <h4><a href="{% url 'home' %}" >{% translate 'back to home' %}</a></h4>
 <div class="row g-4 py-5 row-cols-1 row-cols-lg-3">
     {% for post in posts %}
 
@@ -19,20 +20,20 @@
             <h3 class="fs-4">{{post.title}}</h3>
             <p>{{ post.body| truncatewords:25}}</p>
             <a href="#" class="icon-link d-inline-flex align-items-center">
-            See More
+            {% translate 'See More' %}
             <br>
             </a>
                         
                         
             {%if post.id in like%}
-            <h5 style="color: darkgreen;"> likes {{post.likess.all.count}} &nbsp; &nbsp; <a href="{% url 'dislike' post.id %}"> <img src="{% static 'like.png' %}" style="width: 25px; height: 25px;" > </a> </h5>
+            <h5 style="color: darkgreen;"> {% translate 'likes' %} {{post.likess.all.count}} &nbsp; &nbsp; <a href="{% url 'dislike' post.id %}"> <img src="{% static 'like.png' %}" style="width: 25px; height: 25px;" > </a> </h5>
             {%else%}
-            <h5 style="color: darkgreen;"> likes {{post.likess.all.count}} &nbsp; &nbsp; <a href="{% url 'like' post.id%}"> <img src="{% static 'dislike.png' %}" style="width: 25px; height: 25px;" > </a> </h5>
+            <h5 style="color: darkgreen;"> {% translate 'likes' %} {{post.likess.all.count}} &nbsp; &nbsp; <a href="{% url 'like' post.id%}"> <img src="{% static 'dislike.png' %}" style="width: 25px; height: 25px;" > </a> </h5>
             {%endif%}
-            <h7>{{post.created_time|timesince}}&nbsp;ago</h7>
+            <h7>{{post.created_time|timesince}}&nbsp;{% translate 'ago' %}</h7>
       </div>
     {% empty %}
-      <h4>You did not like any post</h4>
+      <h4>{% translate 'You did not like any post' %}</h4>
     {% endfor %}    
 </div>
 
@@ -40,8 +41,8 @@
   <ul class="pagination pagination-lg flex-wrap">
 
       {% if posts.has_previous %}
-          <li class="page-item"> <a class="page-link" href="?page=1">First</a></li>
-          <li class="page-item"> <a class="page-link" href="?page={{ posts.previous_page_number }}">previous</a> </li> 
+          <li class="page-item"> <a class="page-link" href="?page=1">{% translate 'First' %}</a></li>
+          <li class="page-item"> <a class="page-link" href="?page={{ posts.previous_page_number }}">{% translate 'previous' %}</a> </li> 
       {% endif %}
 
       {% for num in posts.paginator.page_range %}
@@ -55,8 +56,8 @@
           {% endfor %}
 
       {% if posts.has_next %}
-          <li class="page-item"> <a class="page-link"  href="?page={{ posts.next_page_number }}">next</a> </li>
-          <li class="page-item"> <a class="page-link"  href="?page={{ posts.paginator.num_pages }}">last </a> </li>
+          <li class="page-item"> <a class="page-link"  href="?page={{ posts.next_page_number }}">{% translate 'next' %}</a> </li>
+          <li class="page-item"> <a class="page-link"  href="?page={{ posts.paginator.num_pages }}">{% translate 'last' %} </a> </li>
       {% endif %}
 
   </ul>

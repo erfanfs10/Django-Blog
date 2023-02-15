@@ -91,17 +91,11 @@ def your_post(request):
 
     posts = Post.objects.select_related('user__profile').prefetch_related('likess').annotate(like=Count('likess__id')).filter(user=request.user)
     
-    paginator = Paginator(posts, 6) # Show 25 contacts per page.
-
-    page_number = request.GET.get('page') if request.GET.get('page') is not None else ''
-    page_obj = paginator.get_page(page_number)
-
     like = Like.objects.filter(user=request.user).values_list('post_id', flat=True)
 
     context = {
-        'posts': page_obj,
+        'posts': posts,
         'like': like,
-        'p': paginator
     }
 
     return render(request, 'core/your_post.html', context=context)

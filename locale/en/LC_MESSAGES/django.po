@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-02-13 12:06+0000\n"
+"POT-Creation-Date: 2023-02-15 13:09+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,6 +17,23 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: authentication/views.py:17
+#, python-format
+msgid "login was successfull welcome %(user)s"
+msgstr ""
+
+#: authentication/views.py:22
+msgid ""
+"Please enter a correct username and password. Note that both fields may be "
+"case-sensitive."
+msgstr ""
+
+#: authentication/views.py:51
+#, python-format
+msgid "registration was successfull welcome %(user)s"
+msgstr ""
+
 #: blog/settings.py:118
 msgid "Persian"
 msgstr ""
@@ -25,14 +42,277 @@ msgstr ""
 msgid "English"
 msgstr ""
 
-#: blog/settings.py:120
-msgid "French"
+#: core/models.py:8 core/models.py:36 core/models.py:53
+msgid "user"
 msgstr ""
 
-#: core/models.py:41
+#: core/models.py:9
+msgid "bio"
+msgstr ""
+
+#: core/models.py:10
+msgid "image"
+msgstr ""
+
+#: core/models.py:16 templates/core/user_profile.html:8
+msgid "profile"
+msgstr ""
+
+#: core/models.py:17
+msgid "profiles"
+msgstr ""
+
+#: core/models.py:37
+msgid "title"
+msgstr ""
+
+#: core/models.py:38
+msgid "content"
+msgstr ""
+
+#: core/models.py:44 core/models.py:54
+msgid "post"
+msgstr ""
+
+#: core/models.py:45
+msgid "posts"
+msgstr ""
+
+#: core/models.py:60
 msgid "like"
 msgstr ""
 
-#: core/models.py:42
+#: core/models.py:61 templates/core/home.html:46 templates/core/home.html:50
+#: templates/core/home.html:54 templates/core/post.html:27
+#: templates/core/post.html:31 templates/core/post.html:35
+#: templates/core/post_like.html:29 templates/core/post_like.html:31
+#: templates/core/user_profile.html:29 templates/core/user_profile.html:33
+#: templates/core/user_profile.html:37 templates/core/your_post.html:28
+#: templates/core/your_post.html:30
 msgid "likes"
+msgstr ""
+
+#: templates/authentication/login.html:13
+#: templates/authentication/register.html:19 templates/side.html:17
+msgid "login"
+msgstr ""
+
+#: templates/authentication/login.html:16
+msgid "don't have an account?"
+msgstr ""
+
+#: templates/authentication/login.html:16
+#: templates/authentication/register.html:15
+msgid "register"
+msgstr ""
+
+#: templates/authentication/login.html:20
+msgid "you've already login do you like to"
+msgstr ""
+
+#: templates/authentication/login.html:20
+#: templates/authentication/register.html:22
+msgid "logout?"
+msgstr ""
+
+#: templates/authentication/logout.html:9
+msgid "are you sure you want to logout?"
+msgstr ""
+
+#: templates/authentication/logout.html:10
+msgid "logout"
+msgstr ""
+
+#: templates/authentication/logout.html:12 templates/core/post.html:7
+#: templates/core/post_like.html:6 templates/core/user_profile.html:7
+#: templates/core/your_post.html:6
+msgid "back to home"
+msgstr ""
+
+#: templates/authentication/register.html:19
+msgid "already have an account?"
+msgstr ""
+
+#: templates/authentication/register.html:22
+msgid "you've already have an account do you like to"
+msgstr ""
+
+#: templates/base.html:26
+#, python-format
+msgid " %(message)s "
+msgstr ""
+
+#: templates/core/add_post.html:14
+msgid "add"
+msgstr ""
+
+#: templates/core/delete_post.html:8
+msgid "are you sure you want delete your post?"
+msgstr ""
+
+#: templates/core/delete_post.html:9
+msgid "delete"
+msgstr ""
+
+#: templates/core/edit_profile.html:9
+msgid "back to home page"
+msgstr ""
+
+#: templates/core/edit_profile.html:15
+msgid "Delete Image"
+msgstr ""
+
+#: templates/core/edit_profile.html:20
+msgid "edit"
+msgstr ""
+
+#: templates/core/home.html:9
+msgid "Home Page"
+msgstr ""
+
+#: templates/core/home.html:19
+msgid "sort by like"
+msgstr ""
+
+#: templates/core/home.html:22
+msgid "sort by newest"
+msgstr ""
+
+#: templates/core/home.html:40 templates/core/post_like.html:23
+#: templates/core/user_profile.html:23 templates/core/your_post.html:22
+msgid "See More"
+msgstr ""
+
+#: templates/core/home.html:46 templates/core/post.html:27
+#: templates/core/user_profile.html:29
+msgid "login first"
+msgstr ""
+
+#: templates/core/home.html:58 templates/core/post.html:39
+#: templates/core/post_like.html:33 templates/core/your_post.html:32
+msgid "ago"
+msgstr ""
+
+#: templates/core/home.html:61
+msgid "There is no post yet!"
+msgstr ""
+
+#: templates/core/home.html:69 templates/core/post_like.html:44
+msgid "First"
+msgstr ""
+
+#: templates/core/home.html:70 templates/core/post_like.html:45
+msgid "previous"
+msgstr ""
+
+#: templates/core/home.html:84 templates/core/post_like.html:59
+msgid "next"
+msgstr ""
+
+#: templates/core/home.html:85 templates/core/post_like.html:60
+msgid "last"
+msgstr ""
+
+#: templates/core/post.html:8
+#, python-format
+msgid " %(user)s's profile "
+msgstr ""
+
+#: templates/core/post.html:10 templates/core/user_profile.html:10
+#: templates/side.html:11
+msgid "Bio"
+msgstr ""
+
+#: templates/core/post.html:15
+msgid "Title"
+msgstr ""
+
+#: templates/core/post.html:19
+msgid "Body"
+msgstr ""
+
+#: templates/core/post_like.html:6
+msgid "posts that you liked"
+msgstr ""
+
+#: templates/core/post_like.html:36
+msgid "You did not like any post"
+msgstr ""
+
+#: templates/core/update_post.html:10
+msgid "update"
+msgstr ""
+
+#: templates/core/your_post.html:6
+msgid "Your Posts"
+msgstr ""
+
+#: templates/core/your_post.html:8
+#, python-format
+msgid " you have %(count)s posts "
+msgstr ""
+
+#: templates/core/your_post.html:33
+msgid "Update you post"
+msgstr ""
+
+#: templates/core/your_post.html:34
+msgid "Delete your post"
+msgstr ""
+
+#: templates/core/your_post.html:37
+msgid "you Don't have any post yet "
+msgstr ""
+
+#: templates/core/your_post.html:37
+msgid "Add New One"
+msgstr ""
+
+#: templates/side.html:5 templates/side.html:16
+msgid "Your Porfile"
+msgstr ""
+
+#: templates/side.html:9
+msgid "UserName"
+msgstr ""
+
+#: templates/side.html:13
+msgid "Edit Profile"
+msgstr ""
+
+#: templates/side.html:13
+msgid "Logout"
+msgstr ""
+
+#: templates/side.html:17
+msgid "you need to"
+msgstr ""
+
+#: templates/side.html:21
+msgid "Posts"
+msgstr ""
+
+#: templates/side.html:23
+msgid "Add New Post"
+msgstr ""
+
+#: templates/side.html:24
+msgid "Show My Posts"
+msgstr ""
+
+#: templates/side.html:25
+msgid "Show Post That I Liked"
+msgstr ""
+
+#: templates/side.html:27
+msgid "Back to home"
+msgstr ""
+
+#: templates/side.html:44
+msgid "Go"
+msgstr ""
+
+#: templates/side.html:47
+#, python-format
+msgid " currnet language : %(lan)s "
 msgstr ""
