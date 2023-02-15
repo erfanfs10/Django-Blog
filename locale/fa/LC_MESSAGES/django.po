@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-02-15 17:22+0000\n"
+"POT-Creation-Date: 2023-02-15 17:26+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -183,7 +183,8 @@ msgid "login first"
 msgstr "وارد شوید"
 
 #: templates/core/home.html:58 templates/core/post.html:39
-#: templates/core/post_like.html:33 templates/core/your_post.html:32
+#: templates/core/post_like.html:33 templates/core/user_profile.html:41
+#: templates/core/your_post.html:32
 msgid "ago"
 msgstr "پیش"
 
@@ -207,6 +208,10 @@ msgstr "بعدی"
 msgid "last"
 msgstr "آخرین"
 
+#: templates/core/post.html:8 templates/core/user_profile.html:8
+#, python-format
+msgid " %(user)s profile "
+msgstr "پروفایل %(user)s "
 
 #: templates/core/post.html:10 templates/core/user_profile.html:10
 #: templates/side.html:11
@@ -232,10 +237,6 @@ msgstr "شما پستی را نپسندیدین"
 #: templates/core/update_post.html:10
 msgid "update"
 msgstr "تغییر"
-
-#: templates/core/user_profile.html:8
-msgid " %(user)s profile "
-msgstr "پروفایل %(user)s "
 
 #: templates/core/your_post.html:6
 msgid "Your Posts"
@@ -314,6 +315,11 @@ msgstr "اعمال"
 #, python-format
 msgid " currnet language : %(lan)s "
 msgstr "زبان فعلی : %(lan)s"
+
+#, fuzzy, python-format
+#~| msgid " %(user)s profile "
+#~ msgid " %(user)s's profile "
+#~ msgstr "پروفایل %(user)s "
 
 #, python-format
 #~ msgid ""

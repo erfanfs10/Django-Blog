@@ -19,7 +19,7 @@
             </div>
             <h3 class="fs-4">{{post.title}}</h3>
             <p>{{ post.body| truncatewords:25 | title}}</p>
-            <a href="#" class="icon-link d-inline-flex align-items-center">
+            <a href="{% url 'post-view' post.id%}" class="icon-link d-inline-flex align-items-center">
               {% translate 'See More' %}
             <br>
             </a>
@@ -38,7 +38,7 @@
 
             {%endif%}
            
-            <h7>{{post.created_time|timesince}}&nbsp;ago</h7>
+            <h7>{{post.created_time|timesince}}&nbsp;{% translate 'ago' %}</h7>
       </div>
 
     
