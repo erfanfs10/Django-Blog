@@ -5,7 +5,7 @@
 <br>
 <br>
 <h4><a href="{% url 'home' %}" >{% translate 'back to home' %}</a></h4>
-<h3>{{pro.user}}'s  {% translate 'profile' %}</h3>
+<h3> {% blocktranslate with user=pro.user %} {{user}} profile {% endblocktranslate %}</h3>
 <img src="{{pro.user.profile.image.url}}" style="width: 200px; height: 200px; border-radius: 100px;" >
 <h3>{% translate 'Bio'%}: &nbsp;{% if request.user.profile.bio %}{{ request.user.profile.bio }}{% else %}{% endif %}</h3>
 <div class="row g-4 py-5 row-cols-1 row-cols-lg-3">

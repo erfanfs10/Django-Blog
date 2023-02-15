@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-02-15 13:59+0000\n"
+"POT-Creation-Date: 2023-02-15 17:22+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,12 +18,12 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
-#: authentication/views.py:17
+#: authentication/views.py:18
 #, python-format
 msgid "login was successfull welcome %(user)s"
 msgstr "%(user)s با موفقیت وارد شدید خوشامدید  "
 
-#: authentication/views.py:45
+#: authentication/views.py:46
 #, python-format
 msgid "registration was successfull welcome %(user)s"
 msgstr "%(user)s  حساب شما با موفقیت ساخته شد "
@@ -48,7 +48,7 @@ msgstr "توضیحات"
 msgid "image"
 msgstr "تصویر"
 
-#: core/models.py:16 templates/core/user_profile.html:8
+#: core/models.py:16
 msgid "profile"
 msgstr "پروفایل"
 
@@ -207,10 +207,6 @@ msgstr "بعدی"
 msgid "last"
 msgstr "آخرین"
 
-#: templates/core/post.html:8
-#, python-format
-msgid " %(user)s's profile "
-msgstr "%(user)s پروفایل "
 
 #: templates/core/post.html:10 templates/core/user_profile.html:10
 #: templates/side.html:11
@@ -236,6 +232,10 @@ msgstr "شما پستی را نپسندیدین"
 #: templates/core/update_post.html:10
 msgid "update"
 msgstr "تغییر"
+
+#: templates/core/user_profile.html:8
+msgid " %(user)s profile "
+msgstr "پروفایل %(user)s "
 
 #: templates/core/your_post.html:6
 msgid "Your Posts"
