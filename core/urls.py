@@ -9,6 +9,7 @@ from .views import (home, like, dislike,
 
 
 urlpatterns = [
+
     path('', home, name='home'),
     path('like/<int:postid>/', like, name='like'),
     path('dislike/<int:postid>/', dislike, name='dislike'),
@@ -21,4 +22,5 @@ urlpatterns = [
     path('user_profile/<int:userid>/', user_profile, name='user-profile') ,
     path('post_view/<int:postid>/', post_view, name='post-view'),
     path('delete_image', delete_image, name='delete-image'),
+    
 ]

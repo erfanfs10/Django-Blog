@@ -4,6 +4,7 @@ from django.contrib.auth.decorators import login_required
 from core.models import Post, Like, Profile
 from core.forms import PostForm, ProfileForm
 from django.core.paginator import Paginator
+from django.http import Http404
 
 
 def home(request):
@@ -37,7 +38,11 @@ def home(request):
 @login_required(login_url='login')
 def like(request, postid):
 
-    post = Post.objects.get(pk=postid)
+    try: 
+         post = Post.objects.get(pk=postid)
+    except: 
+        return Http404    
+   
     Like.objects.create(user=request.user, post=post)
 
     return redirect(request.META.get('HTTP_REFERER'))
@@ -46,7 +51,11 @@ def like(request, postid):
 @login_required(login_url='login')
 def dislike(request, postid):
 
-    like = Like.objects.get(post=postid, user=request.user)
+    try:
+        like = Like.objects.get(post=postid, user=request.user)
+    except:
+        return Http404
+
     like.delete()
 
     return redirect(request.META.get('HTTP_REFERER'))    
@@ -104,8 +113,11 @@ def your_post(request):
 @login_required(login_url='login')
 def update_post(request, postid):
 
-    post = Post.objects.get(pk=postid)
-
+    try:
+        post = Post.objects.get(pk=postid)
+    except:
+        return Http404
+    
     if request.method == 'POST':
         form = PostForm(request.POST, instance=post)
         if form.is_valid():
@@ -124,8 +136,14 @@ def update_post(request, postid):
 def delete_post(request, postid):
 
     if request.method == "POST":
-        post = Post.objects.get(pk=postid)
+
+        try:
+            post = Post.objects.get(pk=postid)
+        except:
+            return Http404
+        
         post.delete()
+
         return redirect('your-post')
 
     return render(request, 'core/delete_post.html') 
