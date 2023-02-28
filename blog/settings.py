@@ -168,3 +168,11 @@ DEBUG_TOOLBAR_PANELS = [
     'debug_toolbar.panels.redirects.RedirectsPanel',
     'debug_toolbar.panels.profiling.ProfilingPanel',
 ]
+
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_HOST_USER = '' # ENTER YOUR EMAIL ADDRESS
+EMAIL_HOST_PASSWORD = '' # ENTER YOUR APP PASSWORD FROM YOUR GOOGLE ACOUNT
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True

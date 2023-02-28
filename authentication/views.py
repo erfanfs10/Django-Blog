@@ -2,10 +2,12 @@ from django.shortcuts import render
 from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
 from django.contrib.auth import login, logout
 from django.shortcuts import redirect
-from core.models import Profile
 from django.contrib import messages
 from django.utils.translation import gettext_lazy as _
-from django.utils import regex_helper
+from django.core.mail import send_mail
+from authentication.forms import CustomUserCreationForm
+from django.conf import settings
+
 
 
 def login_view(request):
@@ -37,7 +39,7 @@ def logout_view(request):
 def register_view(request):
 
     if request.method == 'POST':
-        form = UserCreationForm(request.POST)
+        form = CustomUserCreationForm(request.POST)
 
         if form.is_valid():
 
@@ -47,10 +49,16 @@ def register_view(request):
             messages.success(request, msg)
 
             login(request, user)
+            send_mail(subject='from blog project', 
+                      message=f'welcome {user.username} your registration was successful',
+                      from_email=settings.EMAIL_HOST_USER ,
+                      recipient_list=[user.email],
+                      fail_silently=False,
+                    )
             return redirect('home')
         
     else:
-        form = UserCreationForm()
+        form = CustomUserCreationForm()
         
 
     return render(request, 'authentication/register.html', {'form':form})        
