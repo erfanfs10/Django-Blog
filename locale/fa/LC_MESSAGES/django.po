@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-02-16 07:49+0000\n"
+"POT-Creation-Date: 2023-03-07 13:22+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,12 +18,12 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
-#: authentication/views.py:18
+#: authentication/views.py:21
 #, python-format
 msgid "login was successfull welcome %(user)s"
 msgstr "%(user)s با موفقیت وارد شدید خوشامدید  "
 
-#: authentication/views.py:46
+#: authentication/views.py:49
 #, python-format
 msgid "registration was successfull welcome %(user)s"
 msgstr "%(user)s  حساب شما با موفقیت ساخته شد "
@@ -86,25 +86,29 @@ msgstr "پسندیده"
 msgid "likes"
 msgstr "پسندیده ها"
 
-#: templates/authentication/login.html:13
+#: templates/authentication/login.html:14
 #: templates/authentication/register.html:19 templates/side.html:17
 msgid "login"
 msgstr "وارد شوید"
 
-#: templates/authentication/login.html:16
+#: templates/authentication/login.html:18
+msgid "Forgot My Password"
+msgstr " رمز خود را فراموش کردم "
+
+#: templates/authentication/login.html:20
 msgid "don't have an account?"
 msgstr "حساب ندارید؟"
 
-#: templates/authentication/login.html:16
+#: templates/authentication/login.html:20
 #: templates/authentication/register.html:15
 msgid "register"
 msgstr "حساب باز کنید"
 
-#: templates/authentication/login.html:20
+#: templates/authentication/login.html:24
 msgid "you've already login do you like to"
 msgstr "شما لاگین هستید آیا میخواهید "
 
-#: templates/authentication/login.html:20
+#: templates/authentication/login.html:24
 #: templates/authentication/register.html:22
 msgid "logout?"
 msgstr " خارج شوید؟ "
@@ -122,6 +126,79 @@ msgstr "خارج شدن"
 #: templates/core/your_post.html:6
 msgid "back to home"
 msgstr "برگشت به خانه"
+
+#: templates/authentication/password_reset.html:5
+msgid "Password reset"
+msgstr "بازیابی رمز عبور"
+
+#: templates/authentication/password_reset.html:7
+msgid ""
+"\n"
+"        Forgotten your password? Enter your email address below, and we’ll "
+"email instructions for setting a new one.\n"
+"    "
+msgstr ""
+"\n"
+" رمز عبور خود را فراموش کردید؟  یمیل خود را برای بازیابی رمز وارد کنید\n"
+"    "
+
+#: templates/authentication/password_reset.html:16
+#: templates/authentication/password_reset_confirm.html:17
+msgid "reset my password"
+msgstr "بازیابی رمز عبور"
+
+#: templates/authentication/password_reset_complete.html:7
+msgid ""
+"\n"
+"        Password reset complete\n"
+"        Your password has been set. You may go ahead and log in now.\n"
+"    "
+msgstr ""
+"\n"
+"  گذرواژه شما با موفقیت تغییر کرد \n"
+"   لطفا دوباره وارد شوید.\n"
+"    "
+
+
+#: templates/authentication/password_reset_complete.html:13
+msgid "LogIn"
+msgstr "ورود"
+
+#: templates/authentication/password_reset_confirm.html:6
+msgid "Enter new password"
+msgstr "ورود گذرواژه جدید"
+
+#: templates/authentication/password_reset_confirm.html:8
+msgid ""
+"\n"
+"        Please enter your new password twice so we can verify you typed it "
+"in correctly.\n"
+"    "
+msgstr ""
+"\n"
+" لطفا گذرواژه جدید خود را برای اعتبار سنجی دوبار وارد کنید\n"
+"    "
+
+#: templates/authentication/password_reset_done.html:5
+msgid "Password reset sent"
+msgstr "لینک تغییر رمز ارسال شد"
+
+#: templates/authentication/password_reset_done.html:7
+msgid ""
+"\n"
+"        We’ve emailed you instructions for setting your password, if an "
+"account exists with the email you entered. You should receive them shortly.\n"
+"\n"
+"        If you don’t receive an email, please make sure you’ve entered the "
+"address you registered with, and check your spam folder.\n"
+"    "
+msgstr ""
+"\n"
+" اگر کاربری با این ایمیل وجود داشته باشد ایمیل برای شما ارسال خواهد شد \n"
+"\n"
+" اگر ایمیل برای شما ارسال نشد مطمن شوید که ایمیلی که با آن حساب باز کرده اید "
+"وارد کرده اید  و حتما پوشه اسپم خود  را چک کنید \n"
+"    "
 
 #: templates/authentication/register.html:19
 msgid "already have an account?"
@@ -319,17 +396,3 @@ msgstr "اعمال"
 #, python-format
 msgid " currnet language : %(lan)s "
 msgstr "زبان فعلی : %(lan)s"
-
-#, fuzzy, python-format
-#~| msgid " %(user)s profile "
-#~ msgid " %(user)s's profile "
-#~ msgstr "پروفایل %(user)s "
-
-#, python-format
-#~ msgid ""
-#~ "Please enter a correct %(username)s and password. Note that both fields "
-#~ "may be case-sensitiveeeee."
-#~ msgstr "%(username)sانننننننن"
-
-#~ msgid "currnet language"
-#~ msgstr "زبان فعلی"

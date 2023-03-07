@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
+from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth import login, logout
 from django.shortcuts import redirect
 from django.contrib import messages
@@ -7,6 +7,7 @@ from django.utils.translation import gettext_lazy as _
 from django.core.mail import send_mail
 from authentication.forms import CustomUserCreationForm
 from django.conf import settings
+
 
 
 

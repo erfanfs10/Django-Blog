@@ -10,9 +10,13 @@
 
                 {% csrf_token %}
                 {{form | crispy}}
+                <br>
                 <button type="submit" class="btn btn-primary">{% translate 'login' %}</button>
 
             </form>
+            <br>
+            <h6><a href="{% url 'password_reset' %}">{% translate 'Forgot My Password'%}</a></h6>
+            <br>
             <h5>{% translate "don't have an account?" %} <a href="{% url 'register'%}" >{% translate 'register' %}</a></h5>
             
         </div>
