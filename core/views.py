@@ -80,8 +80,6 @@ def add_post(request):
 @login_required(login_url='login')
 def post_like(request):
 
-    # posts = Like.objects.select_related('post').filter(user=request.user)
-
     posts = Post.objects.select_related('user__profile').prefetch_related('likess').annotate(like=Count('likess__id')).filter(likess__user = request.user)
     
 
@@ -198,6 +196,3 @@ def delete_image(request):
     Profile.objects.filter(user=request.user).update(image='def.png')
 
     return redirect('edit-profile')
-
-def salam(insa: int):
-    pass
