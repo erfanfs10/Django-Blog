@@ -198,3 +198,6 @@ def delete_image(request):
     Profile.objects.filter(user=request.user).update(image='def.png')
 
     return redirect('edit-profile')
+
+def salam(insa: int):
+    pass
