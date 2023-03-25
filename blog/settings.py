@@ -12,8 +12,6 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 
 
 from pathlib import Path
-from blog.local_setting import DEBUG, SK, EMAIL, APPP
-import os
 from django.utils.translation import gettext_lazy as _
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -23,10 +21,10 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = SK
+SECRET_KEY = 'YOUR SECRET KEY'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = DEBUG
+DEBUG = True 
 
 ALLOWED_HOSTS = ['*']
 
@@ -148,7 +146,7 @@ CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_HOST_USER = EMAIL
-EMAIL_HOST_PASSWORD = APPP 
+EMAIL_HOST_USER = 'YOUR EMAIL ADDRESS'
+EMAIL_HOST_PASSWORD = "YOUR GOOGLE PASSWORD APP" 
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
