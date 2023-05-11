@@ -5,9 +5,13 @@ from django.conf.urls.static import static
 
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
-    path('', include('core.urls')),
-    path('auth/', include('authentication.urls')),
-    path('i18n/', include('django.conf.urls.i18n')),
+    path('blog/admin/', admin.site.urls),
+    path('blog/', include('core.urls')),
+    path('blog/auth/', include('authentication.urls')),
+    path('blog/i18n/', include('django.conf.urls.i18n')),
 
-] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+]
+
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+    
