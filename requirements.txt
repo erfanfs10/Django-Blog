@@ -5,8 +5,9 @@ Django==3.2
 django-crispy-forms==1.14.0
 idna==3.4
 Pillow==9.3.0
+pymemcache==4.0.0
 pytz==2022.7
 requests==2.28.2
 sqlparse==0.4.3
-typing_extensions==4.4.0
+typing-extensions==4.4.0
 urllib3==1.26.14
