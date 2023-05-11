@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-05-11 17:29+0000\n"
+"POT-Creation-Date: 2023-05-11 20:19+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,9 +18,25 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
-#: authentication/forms.py:12
+#: authentication/forms.py:11
 msgid "A user with that Email already exists."
 msgstr "این ایمیل وجود دارد"
+
+#: authentication/forms.py:14
+#, fuzzy
+#| msgid "A user with that Email already exists."
+msgid "A user with that username already exists."
+msgstr "این ایمیل وجود دارد"
+
+#: authentication/models.py:9
+#, fuzzy
+#| msgid "user"
+msgid "username"
+msgstr "نام کاربری"
+
+#: authentication/models.py:10
+msgid "Email"
+msgstr "ایمیل"
 
 #: authentication/views.py:21
 #, python-format
