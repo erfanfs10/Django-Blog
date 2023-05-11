@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-03-07 13:22+0000\n"
+"POT-Creation-Date: 2023-05-11 17:29+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,6 +17,10 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
+
+#: authentication/forms.py:12
+msgid "A user with that Email already exists."
+msgstr "این ایمیل وجود دارد"
 
 #: authentication/views.py:21
 #, python-format
@@ -28,11 +32,11 @@ msgstr "%(user)s با موفقیت وارد شدید خوشامدید  "
 msgid "registration was successfull welcome %(user)s"
 msgstr "%(user)s  حساب شما با موفقیت ساخته شد "
 
-#: blog/settings.py:118
+#: blog/settings.py:124
 msgid "Persian"
 msgstr ""
 
-#: blog/settings.py:119
+#: blog/settings.py:125
 msgid "English"
 msgstr ""
 
@@ -159,7 +163,6 @@ msgstr ""
 "   لطفا دوباره وارد شوید.\n"
 "    "
 
-
 #: templates/authentication/password_reset_complete.html:13
 msgid "LogIn"
 msgstr "ورود"
@@ -208,7 +211,7 @@ msgstr "آیا حساب دارید؟"
 msgid "you've already have an account do you like to"
 msgstr "شما حساب دارید آیا میخاهید "
 
-#: templates/base.html:26
+#: templates/base.html:27
 #, python-format
 msgid " %(message)s "
 msgstr "%(message)s"
