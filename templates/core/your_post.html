@@ -30,7 +30,7 @@
             <h5 style="color: darkgreen;"> {% translate 'likes' %} {{post.likess.all.count}} &nbsp; &nbsp; <a href="{% url 'like' post.id%}"> <img src="{% static 'dislike.png' %}" style="width: 25px; height: 25px;" > </a> </h5>
             {%endif%}
             <h7>{{post.created_time|timesince}}&nbsp;{% translate 'ago' %}</h7>
-            <h6> <a href="{% url 'update-post' post.id%}">{% translate 'Update you post' %}</a></h6>
+            <h6> <a href="{% url 'update-post' post.id%}">{% translate 'Update your post' %}</a></h6>
             <h6> <a href="{% url 'delete-post' post.id %}" style="color: crimson;" >{% translate 'Delete your post' %}</a> </h6>
       </div>
     {% empty %}
