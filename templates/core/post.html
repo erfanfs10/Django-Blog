@@ -22,7 +22,7 @@
             
             <br>
             <br>        
-            {% if post.like is None %}
+            {% if like is None %}
 
             <h5 style="color: darkgreen;"> {% translate 'likes' %} {{post.like}} &nbsp;<a href="{% url 'login' %}"> {% translate 'login first' %}  </a> </h5>
   

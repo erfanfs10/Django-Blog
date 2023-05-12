@@ -186,9 +186,12 @@ def user_profile(request, userid):
 def post_view(request, postid):
 
     post = Post.objects.annotate(like=Count('likess__id')).filter(pk=postid).first()
-    if not request.user.is_authenticated:
-        post.like = None
-    return render(request, 'core/post.html', {'post': post})
+
+    if request.user.is_authenticated:
+        like = Like.objects.filter(post=postid).values_list('post_id', flat=True)
+    else:        
+        like = None
+    return render(request, 'core/post.html', {'post': post, 'like':like})
 
 
 @login_required(login_url='login')
