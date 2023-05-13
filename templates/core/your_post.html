@@ -18,7 +18,7 @@
             </div>
             <h3 class="fs-4">{{post.title}}</h3>
             <p>{{ post.body| truncatewords:25}}</p>
-            <a href="#" class="icon-link d-inline-flex align-items-center">
+            <a href="{%url 'post-view' post.id%}" class="icon-link d-inline-flex align-items-center">
               {% translate 'See More' %}
             <br>
             </a>
