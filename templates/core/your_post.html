@@ -34,7 +34,7 @@
             <h6> <a href="{% url 'delete-post' post.id %}" style="color: crimson;" >{% translate 'Delete your post' %}</a> </h6>
       </div>
     {% empty %}
-      <h4>{% translate "you Don't have any post yet " %} <a href="{% url 'add-post' %}" >{% translate 'Add New One' %}</a></h4>
+      <h4><a href="{% url 'add-post' %}" >{% translate 'Add New One' %}</a></h4>
     {% endfor %}    
 </div>    
 

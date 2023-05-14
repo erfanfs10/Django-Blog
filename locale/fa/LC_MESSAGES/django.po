@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-05-11 20:19+0000\n"
+"POT-Creation-Date: 2023-05-14 20:01+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -38,12 +38,12 @@ msgstr "نام کاربری"
 msgid "Email"
 msgstr "ایمیل"
 
-#: authentication/views.py:21
+#: authentication/views.py:19
 #, python-format
 msgid "login was successfull welcome %(user)s"
 msgstr "%(user)s با موفقیت وارد شدید خوشامدید  "
 
-#: authentication/views.py:49
+#: authentication/views.py:47
 #, python-format
 msgid "registration was successfull welcome %(user)s"
 msgstr "%(user)s  حساب شما با موفقیت ساخته شد "
@@ -180,6 +180,7 @@ msgstr ""
 "    "
 
 #: templates/authentication/password_reset_complete.html:13
+#: templates/authentication/password_reset_done.html:14
 msgid "LogIn"
 msgstr "ورود"
 
@@ -348,7 +349,9 @@ msgid " you have %(count)s posts "
 msgstr "شما %(count)s پست دارید "
 
 #: templates/core/your_post.html:33
-msgid "Update you post"
+#, fuzzy
+#| msgid "Update you post"
+msgid "Update your post"
 msgstr "تغییر پست"
 
 #: templates/core/your_post.html:34
@@ -356,14 +359,6 @@ msgid "Delete your post"
 msgstr "حذف پست"
 
 #: templates/core/your_post.html:37
-#, fuzzy
-#| msgid "You did not like any post"
-msgid "you Don't have any post yet "
-msgstr "شما پستی را نپسندیدین"
-
-#: templates/core/your_post.html:37
-#, fuzzy
-#| msgid "Add New Post"
 msgid "Add New One"
 msgstr "پست جدید"
 
@@ -415,3 +410,4 @@ msgstr "اعمال"
 #, python-format
 msgid " currnet language : %(lan)s "
 msgstr "زبان فعلی : %(lan)s"
+
