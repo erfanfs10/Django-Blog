@@ -4,9 +4,7 @@ from django.contrib.auth import login, logout
 from django.shortcuts import redirect
 from django.contrib import messages
 from django.utils.translation import gettext_lazy as _
-from django.core.mail import send_mail
 from authentication.forms import CustomUserCreationForm
-from django.conf import settings
 
 
 
@@ -48,14 +46,7 @@ def register_view(request):
             form.save()
             msg = _('registration was successfull welcome %(user)s' ) % {'user': user.username}
             messages.success(request, msg)
-
             login(request, user)
-            send_mail(subject='from blog project', 
-                      message=f'welcome {user.username} your registration was successful',
-                      from_email=settings.EMAIL_HOST_USER ,
-                      recipient_list=[user.email],
-                      fail_silently=False,
-                    )
             return redirect('home')
         
     else:
