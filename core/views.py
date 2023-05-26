@@ -35,7 +35,7 @@ def home(request):
     return render(request, 'core/home.html', {'posts': page_obj, 'like': like})
 
 
-@login_required(login_url='login')
+@login_required()
 def like(request, postid):
 
     try: 
@@ -48,7 +48,7 @@ def like(request, postid):
     return redirect(request.META.get('HTTP_REFERER'))
 
 
-@login_required(login_url='login')
+@login_required()
 def dislike(request, postid):
 
     try:
@@ -61,7 +61,7 @@ def dislike(request, postid):
     return redirect(request.META.get('HTTP_REFERER'))    
 
 
-@login_required(login_url='login')
+@login_required()
 def add_post(request):
 
     if request.method == 'POST': 
@@ -77,7 +77,7 @@ def add_post(request):
     return render(request, 'core/add_post.html', {'form': form})
 
 
-@login_required(login_url='login')
+@login_required()
 def post_like(request):
 
     posts = Post.objects.select_related('user__profile').prefetch_related('likess').annotate(like=Count('likess__id')).filter(likess__user = request.user)
@@ -93,7 +93,7 @@ def post_like(request):
     return render(request, 'core/post_like.html', {'posts': page_obj, 'like': like})
 
 
-@login_required(login_url='login')
+@login_required()
 def your_post(request):
 
     posts = Post.objects.select_related('user__profile').prefetch_related('likess').annotate(like=Count('likess__id')).filter(user=request.user)
@@ -108,7 +108,7 @@ def your_post(request):
     return render(request, 'core/your_post.html', context=context)
 
 
-@login_required(login_url='login')
+@login_required()
 def update_post(request, postid):
 
     try:
@@ -130,7 +130,7 @@ def update_post(request, postid):
     return render(request, 'core/update_post.html', {'form': form})        
 
 
-@login_required(login_url='login')
+@login_required()
 def delete_post(request, postid):
 
     if request.method == "POST":
@@ -147,7 +147,7 @@ def delete_post(request, postid):
     return render(request, 'core/delete_post.html') 
 
 
-@login_required(login_url='login')
+@login_required()
 def edit_profile(request):
     
     if request.method == 'POST':
@@ -194,7 +194,7 @@ def post_view(request, postid):
     return render(request, 'core/post.html', {'post': post, 'like':like})
 
 
-@login_required(login_url='login')
+@login_required()
 def delete_image(request):
 
     Profile.objects.filter(user=request.user).update(image='def.png')
