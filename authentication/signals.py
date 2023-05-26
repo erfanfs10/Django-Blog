@@ -12,5 +12,7 @@ def send_welcome_email(sender, instance, created, **kwargs):
         message = f'Hi {instance.username},\n\nThanks for registering on My Site!'
         from_email = settings.EMAIL_HOST_USER
         to = (instance.email,)
-        send_mail(subject, message, from_email, to)
-        
+        try:
+            send_mail(subject, message, from_email, to)
+        except:
+            return
