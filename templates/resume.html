@@ -1,6 +1,8 @@
 {% load static %}
 {% load cache %}
 
+{% cache None 'resume' %}
+
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -158,12 +160,18 @@
             <section class="resume-section" id="interests">
 
                 <div class="resume-section-content">
+
                     <h2 class="mb-5">Projects</h2>
+
                     <h3><a href="https://www.mahdifarahmand.ir/eco" target="_blank" >E_Commerce</a></h3>
+                    <a href="https://www.mahdifarahmand.ir/eco" target="_blank" >https://www.mahdifarahmand.ir/eco</a>
                     <div class="subheading mb-3">Simulation of a computer component online shop</div>
                     <br>
+
                     <h3><a href="https://www.mahdifarahmand.ir/blog" target="_blank" >Blog</a></h3>
+                    <a href="https://www.mahdifarahmand.ir/blog" target="_blank" >https://www.mahdifarahmand.ir/blog</a>
                     <div class="subheading mb-3">A Simple Blog Project Using Django Framework</div>
+
                 </div>
 
             </section>
@@ -191,3 +199,5 @@
         <script src="{% static 'resume.js' %}"></script>
     </body>
 </html>
+
+{% endcache %}
