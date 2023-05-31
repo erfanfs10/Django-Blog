@@ -99,7 +99,9 @@ def your_post(request):
     posts = Post.objects.select_related('user__profile').prefetch_related('likess').annotate(like=Count('likess__id')).filter(user=request.user)
     
     like = Like.objects.filter(user=request.user).values_list('post_id', flat=True)
-
+    for i in posts:
+        print(i.like)
+    print(like)
     context = {
         'posts': posts,
         'like': like,
@@ -166,8 +168,7 @@ def edit_profile(request):
 def user_profile(request, userid):
 
     posts = Post.objects.select_related('user__profile').annotate(like=Count('likess__id')).filter(user=userid)
-    pro = posts.first()
-
+    
     if request.user.is_authenticated:
 
         like = Like.objects.filter(user=request.user).values_list('post_id', flat=True)
@@ -177,7 +178,6 @@ def user_profile(request, userid):
     context = {
         'posts': posts,
         'like': like,
-        'pro': pro
     }
 
     return render(request, 'core/user_profile.html', context=context)
@@ -188,9 +188,11 @@ def post_view(request, postid):
     post = Post.objects.annotate(like=Count('likess__id')).filter(pk=postid).first()
 
     if request.user.is_authenticated:
-        like = Like.objects.filter(post=postid).values_list('post_id', flat=True)
+        like = Like.objects.filter(user=request.user, post=postid)
+      
     else:        
         like = None
+   
     return render(request, 'core/post.html', {'post': post, 'like':like})
 
 

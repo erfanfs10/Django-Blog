@@ -26,7 +26,7 @@
 
             <h5 style="color: darkgreen;"> {% translate 'likes' %} {{post.like}} &nbsp;<a href="{% url 'login' %}"> {% translate 'login first' %}  </a> </h5>
   
-            {%elif post.id in like%}
+            {%elif like%}
 
             <h5 style="color: darkgreen;"> {% translate 'likes' %} {{post.like}} &nbsp; &nbsp; <a href="{% url 'dislike' post.id %}"> <img src="{% static 'like.png' %}" style="width: 25px; height: 25px;" > </a> </h5>
 

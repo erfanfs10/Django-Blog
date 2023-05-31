@@ -11,12 +11,12 @@ class ProfileAdmin(admin.ModelAdmin):
 
 @register(Post)
 class PostAdmin(admin.ModelAdmin):
-    list_display = ('user', 'title', 'created_time')
+    list_display = ('user', "id", 'title', 'created_time')
 
 
 @register(Like)
 class LikeAdmin(admin.ModelAdmin):
-    list_display = ('user', 'post')
+    list_display = ('user', "id", 'post')
 
 
 @register(CustomUser)
