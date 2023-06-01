@@ -47,6 +47,11 @@ def register_view(request):
             msg = _('registration was successfull welcome %(user)s' ) % {'user': user.username}
             messages.success(request, msg)
             login(request, user)
+
+            subject = 'Welcome to My Site!'
+            message = f'Hi {user.username},\n\nThanks for registering on My Site!'
+            user.send_welcome_email(subject, message) # send welcome email to user
+
             return redirect('home')
         
     else:
