@@ -10,7 +10,6 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.2/ref/settings/
 """
 
-
 from pathlib import Path
 from django.utils.translation import gettext_lazy as _
 from kombu import Queue, Exchange
@@ -88,12 +87,12 @@ DATABASES = {
     }
 }
 
-
 CACHES = {
     "default": {
-        "BACKEND": "django.core.cache.backends.memcached.PyMemcacheCache",
-        "LOCATION": "127.0.0.1:11211",
+        "BACKEND": "django_redis.cache.RedisCache",
+        "LOCATION": "redis://127.0.0.1:6379",
         "KEY_PREFIX": "blog"        
+
     }
 }
 
