@@ -9,5 +9,5 @@ def send_welcome_email_task(subject, message, from_email, to):
         send_mail(subject, message, from_email, to)
         print(f"sent successfully to {to}")
     except:
-        print(f"error while sending email to {to}")  
+        print(f"error while sending email to {to}") 
     return "EXECUTED"    

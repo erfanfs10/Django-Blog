@@ -13,6 +13,7 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 
 from pathlib import Path
 from django.utils.translation import gettext_lazy as _
+from kombu import Queue, Exchange
 from .local_setting import SECRET_KEY, DEBUG, EMAIL, APP_PASSWORD, ALLOWED_HOSTS
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -169,3 +170,18 @@ EMAIL_USE_TLS = True
 CELERY_BROKER_URL = 'redis://localhost:6379'
 CELERY_TIMEZONE = "Asia/Tehran"
 CELERY_TASK_TIME_LIMIT = 30 * 60
+
+Bemail_exchange = Exchange('Bemail', type='direct')
+
+CELERY_QUEUES = (
+    Queue('Bemail', Bemail_exchange, routing_key='Bemail'),
+)
+
+CELERY_DEFAULT_QUEUE = 'Bmail   '
+CELERY_DEFAULT_EXCHANGE = 'Bemail'
+CELERY_DEFAULT_ROUTING_KEY = 'Bemail'
+#
+CELERY_ROUTES = ({'tasks.send_welcome_email_task': {
+                        'queue': 'Bemail',
+                        'routing_key': 'Bemail'
+                 }})

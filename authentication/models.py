@@ -23,6 +23,10 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
     def send_welcome_email(self, subject, message):
         from_email = settings.EMAIL_HOST_USER
         to = (self.email,)
-        send_welcome_email_task.apply_async(args=[subject, message, from_email, to], ignore_result=True)
+        send_welcome_email_task.apply_async(args=[subject, message, from_email, to],
+                                            ignore_result=True,
+                                            queue='Bemail',
+                                            routing_key='Bemail'
+                                             )
     
 
