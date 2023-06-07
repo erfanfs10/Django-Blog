@@ -7,5 +7,3 @@ media/profile/*.png
 media/profile/*.jpeg
 media/profile/*.jpg
 *.log
-/blog/urls.*
-resume.*
