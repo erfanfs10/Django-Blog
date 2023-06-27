@@ -4,15 +4,13 @@ from django.conf import settings
 from django.conf.urls.static import static
 from django.views.generic import TemplateView
 
-
 urlpatterns = [
-    path('', TemplateView.as_view(template_name='resume.html')),
-    path('blog/admin/', admin.site.urls),
-    path('blog/', include('core.urls')),
-    path('blog/auth/', include('authentication.urls')),
-    path('blog/i18n/', include('django.conf.urls.i18n')),
-    path('blog/api-auth/', include('rest_framework.urls')),
-    path('blog/api/', include('api.urls'))
+    path('admin/', admin.site.urls),
+    path('', include('core.urls')),
+    path('auth/', include('authentication.urls')),
+    path('i18n/', include('django.conf.urls.i18n')),
+    path('api-auth/', include('rest_framework.urls')),
+    path('api/', include('api.urls'))
 
 
 ]
