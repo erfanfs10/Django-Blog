@@ -25,7 +25,7 @@ How to run the project?
   * DEBUG = True          # if you want to use this project in production change the value to False.
   * EMAIL = "YOUR EMAIL ADDRESS"
   * APP_PASSWORD = "YOUR APP PASSWORD"
-  * ALLOWED_HOSTS = ['*']         # if you want to use this project in production replace your domain in that list.
+  * ALLOWED_HOSTS = ['*']         # if you want to use this project in production replace * with your domain .
   
 4: 
   * Run python manage.py migrate
