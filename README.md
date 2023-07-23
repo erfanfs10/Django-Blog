@@ -5,7 +5,7 @@ A Simple Blog Project Using Django Framework  Features used in this project :
 * Set A Profile
 * Manage Your Posts
 * Like Posts
-* Used Redis asn Cache backend 
+* Used Redis as Cache backend 
 * Used Session Framework 
 * Used Message Framework 
 * Send a Welcome Email using celery with Redis
