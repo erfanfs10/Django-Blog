@@ -7,8 +7,7 @@ urlpatterns = [
     path('blog/admin/', admin.site.urls),
     path('blog/', include('core.urls')),
     path('blog/auth/', include('authentication.urls')),
-    path('blog/i18n/', include('django.conf.urls.i18n')),
-    path('blog/api-auth/', include('rest_framework.urls')),
+    path('blog/i18n/', include('django.conf.urls.i18n'))
 ]
 
 if settings.DEBUG:
