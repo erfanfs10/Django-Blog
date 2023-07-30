@@ -171,10 +171,10 @@ CELERY_BROKER_URL = 'redis://localhost:6379'
 CELERY_TIMEZONE = "Asia/Tehran"
 CELERY_TASK_TIME_LIMIT = 30 * 60
 
-Bemail_exchange = Exchange('email', type='direct')
+email_exchange = Exchange('email', type='direct')
 
 CELERY_QUEUES = (
-    Queue('email', Bemail_exchange, routing_key='email'),
+    Queue('email', email_exchange, routing_key='email'),
 )
 
 CELERY_DEFAULT_QUEUE = 'mail   '
