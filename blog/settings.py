@@ -39,11 +39,10 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+
     'crispy_forms',
     'core.apps.CoreConfig',
-    'api.apps.ApiConfig',
     'authentication.apps.AuthenticationConfig',
-    'rest_framework'
     
 ]
 
@@ -172,17 +171,17 @@ CELERY_BROKER_URL = 'redis://localhost:6379'
 CELERY_TIMEZONE = "Asia/Tehran"
 CELERY_TASK_TIME_LIMIT = 30 * 60
 
-Bemail_exchange = Exchange('Bemail', type='direct')
+Bemail_exchange = Exchange('email', type='direct')
 
 CELERY_QUEUES = (
-    Queue('Bemail', Bemail_exchange, routing_key='Bemail'),
+    Queue('email', Bemail_exchange, routing_key='email'),
 )
 
-CELERY_DEFAULT_QUEUE = 'Bmail   '
-CELERY_DEFAULT_EXCHANGE = 'Bemail'
-CELERY_DEFAULT_ROUTING_KEY = 'Bemail'
+CELERY_DEFAULT_QUEUE = 'mail   '
+CELERY_DEFAULT_EXCHANGE = 'email'
+CELERY_DEFAULT_ROUTING_KEY = 'email'
 #
 CELERY_ROUTES = ({'tasks.send_welcome_email_task': {
-                        'queue': 'Bemail',
-                        'routing_key': 'Bemail'
+                        'queue': 'email',
+                        'routing_key': 'email'
                  }})

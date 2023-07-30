@@ -9,9 +9,6 @@ urlpatterns = [
     path('auth/', include('authentication.urls')),
     path('i18n/', include('django.conf.urls.i18n')),
     path('api-auth/', include('rest_framework.urls')),
-    path('api/', include('api.urls'))
-
-
 ]
 
 if settings.DEBUG:

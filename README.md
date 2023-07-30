@@ -35,7 +35,7 @@ How to run the project?
   * run python manage.py runserver
 
 6:
-  * celery -A E_commerce worker -Q Bemail -l INFO   # if you don't run this, emails will not send to the users.
+  * celery -A blog worker -Q email -l INFO   # if you don't run this, emails will not send to the users.
 
   
 ENJOY THE PROJECT :)

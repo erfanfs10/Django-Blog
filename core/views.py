@@ -1,168 +1,124 @@
-from django.shortcuts import render, redirect
+from django.db.models.query import QuerySet
 from django.db.models import Count, Q
+from django.shortcuts import render, redirect
+from django.urls import reverse_lazy
+from django.http import Http404, HttpResponse
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.views.generic import DeleteView, UpdateView, ListView, CreateView
+from django.views import View
 from core.models import Post, Like, Profile
 from core.forms import PostForm, ProfileForm
-from django.core.paginator import Paginator
-from django.http import Http404
 
 
-def home(request):
+class Home(ListView):
+    model = Post
+    template_name = "core/home.html"
+    paginate_by = 6
+    context_object_name = "posts"
 
-    q = request.GET.get('q').lower() if request.GET.get('q') is not None else ''
-    
-    if q == '':
-        posts = Post.objects.select_related('user__profile').annotate(like=Count('likess__id')).all().order_by( '-updated_time', '-created_time')
-    elif q == 'new':
-        posts = Post.objects.select_related('user__profile').annotate(like=Count('likess__id')).all().order_by('-created_time')
-    elif q == 'like':
-        posts = Post.objects.select_related('user__profile').annotate(like=Count('likess__id')).all().order_by('-like')
-    else:
-        posts = Post.objects.select_related('user__profile').annotate(like=Count('likess__id')).filter( Q(title__icontains=q) | Q(user__username__icontains=q) )
-    
+    def get_queryset(self):
+        q = self.request.GET.get("q", "-created_time").lower()
+        posts = Post.objects.select_related('user__profile').annotate(like=Count('likess__id')).order_by(q)
+        return posts
 
-    paginator = Paginator(posts, 6) 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        if self.request.user.is_authenticated:
+            like = Like.objects.filter(user=self.request.user).values_list('post_id', flat=True)
+        else:
+            like = None
+        context["like"] = like
+        return context    
 
-    page_number = request.GET.get('page') if request.GET.get('page') is not None else ''
-    page_obj = paginator.get_page(page_number)
 
-    if request.user.is_authenticated:
-    
-        like = Like.objects.filter(user=request.user).values_list('post_id', flat=True)
-    else:        
-        like = None
+class Search(ListView):
+    model = Post
+    template_name = "core/search.html"
+    paginate_by = 6
+    context_object_name = "posts"
 
-    return render(request, 'core/home.html', {'posts': page_obj, 'like': like})
+    def get_queryset(self):
+        q = self.request.GET.get("q", "")
+        posts = Post.objects.select_related('user__profile').annotate(like=Count('likess__id')).filter(
+            Q(title__icontains=q) | Q(user__username__icontains=q) ).order_by("-created_time")        
+        return posts
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        if self.request.user.is_authenticated:
+            like = Like.objects.filter(user=self.request.user).values_list('post_id', flat=True)
+        else:
+            like = None
+        context["like"] = like
+        return context    
 
 
 @login_required()
 def like(request, postid):
-
     try: 
          post = Post.objects.get(pk=postid)
     except: 
         return Http404    
    
     Like.objects.create(user=request.user, post=post)
-
     return redirect(request.META.get('HTTP_REFERER'))
 
 
 @login_required()
 def dislike(request, postid):
-
     try:
         like = Like.objects.get(post=postid, user=request.user)
     except:
         return Http404
 
     like.delete()
-
     return redirect(request.META.get('HTTP_REFERER'))    
 
 
-@login_required()
-def add_post(request):
+class PostAdd(LoginRequiredMixin, CreateView):
+    model = Post
+    form_class = PostForm
+    template_name = "core/add_post.html"
+    success_url = reverse_lazy("home")
 
-    if request.method == 'POST': 
-        form = PostForm(request.POST)
-        if form.is_valid():
-            instance = form.save(commit=False)
-            instance.user = request.user
-            instance.save()
-            return redirect('home')
-    else:        
-        form = PostForm()
-
-    return render(request, 'core/add_post.html', {'form': form})
-
-
-@login_required()
-def post_like(request):
-
-    posts = Post.objects.select_related('user__profile').prefetch_related('likess').annotate(like=Count('likess__id')).filter(likess__user = request.user)
+    def form_valid(self, form):
+        form.instance.user = self.request.user
+        return super().form_valid(form)
     
 
-    paginator = Paginator(posts, 6) # Show 25 contacts per page.
+class PostLike(LoginRequiredMixin, ListView):
+    model = Post
+    paginate_by = 6
+    context_object_name = "posts"
+    template_name = "core/post_like.html"
 
-    page_number = request.GET.get('page') if request.GET.get('page') is not None else ''
-    page_obj = paginator.get_page(page_number)
-
-    like = Like.objects.filter(user=request.user).values_list('post_id', flat=True)
-
-    return render(request, 'core/post_like.html', {'posts': page_obj, 'like': like})
-
-
-@login_required()
-def your_post(request):
-
-    posts = Post.objects.select_related('user__profile').prefetch_related('likess').annotate(like=Count('likess__id')).filter(user=request.user)
+    def get_queryset(self):
+        posts = Post.objects.select_related('user__profile').prefetch_related('likess').annotate(like=Count('likess__id')).filter(
+            likess__user = self.request.user)
+        return posts
     
-    like = Like.objects.filter(user=request.user).values_list('post_id', flat=True)
-    for i in posts:
-        print(i.like)
-    print(like)
-    context = {
-        'posts': posts,
-        'like': like,
-    }
-
-    return render(request, 'core/your_post.html', context=context)
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        like = Like.objects.filter(user=self.request.user).values_list('post_id', flat=True)
+        context["like"] = like
+        return context
 
 
-@login_required()
-def update_post(request, postid):
+class ProfileUpdate(LoginRequiredMixin, View):
+    form_class = ProfileForm
 
-    try:
-        post = Post.objects.get(pk=postid)
-    except:
-        return Http404
-    
-    if request.method == 'POST':
-        form = PostForm(request.POST, instance=post)
-        if form.is_valid():
-            instance = form.save(commit=False)
-            instance.user = request.user
-            instance.save()
-            return redirect('your-post')
-   
-    else:
-        form = PostForm(instance=post)
+    def get(self, request):
+        form = self.form_class(instance=request.user.profile)
+        return render(request, 'core/edit_profile.html', {'form': form})
 
-    return render(request, 'core/update_post.html', {'form': form})        
-
-
-@login_required()
-def delete_post(request, postid):
-
-    if request.method == "POST":
-
-        try:
-            post = Post.objects.get(pk=postid)
-        except:
-            return Http404
-        
-        post.delete()
-
-        return redirect('your-post')
-
-    return render(request, 'core/delete_post.html') 
-
-
-@login_required()
-def edit_profile(request):
-    
-    if request.method == 'POST':
+    def post(self, request):
         form = ProfileForm(request.POST, request.FILES, instance=request.user.profile)
         if form.is_valid():
             form.save()
             return redirect('home')
         
-    else:
-
-        form = ProfileForm(instance=request.user.profile)
-
-    return render(request, 'core/edit_profile.html', {'form': form})
+        return render(request, 'core/edit_profile.html', {'form': form})
 
 
 def user_profile(request, userid):
@@ -189,7 +145,6 @@ def post_view(request, postid):
 
     if request.user.is_authenticated:
         like = Like.objects.filter(user=request.user, post=postid)
-      
     else:        
         like = None
    
@@ -202,3 +157,34 @@ def delete_image(request):
     Profile.objects.filter(user=request.user).update(image='def.png')
 
     return redirect('edit-profile')
+
+
+class MyPost(LoginRequiredMixin, ListView):
+    model = Post
+    paginate_by = 6
+    template_name = "core/your_post.html"
+    context_object_name = "posts"
+
+    def get_queryset(self):
+        posts = Post.objects.select_related('user__profile').prefetch_related('likess').annotate(like=Count('likess__id')).filter(
+            user=self.request.user).order_by("-created_time")
+        return posts
+    
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        like = Like.objects.filter(user=self.request.user).values_list('post_id', flat=True)
+        context["like"] = like
+        return context
+
+
+class PostUpdate(LoginRequiredMixin, UpdateView):
+    model = Post
+    fields = ("title", "body")
+    template_name = "core/update_post.html"
+    success_url = reverse_lazy("your-post")
+
+
+class PostDelete(LoginRequiredMixin, DeleteView):
+    model = Post
+    template_name = "core/delete_post.html"
+    success_url = reverse_lazy("your-post")

@@ -10,7 +10,7 @@
     </div>
     <div style="display: inline-block; margin-right: 10px;">
 
-        <form class="d-flex" role="search">
+        <form class="d-flex" role="search" action="{% url 'search' %}">
             <input name="q" class="form-control me-2" type="search" placeholder="{% translate 'Search' %}" aria-label="Search">
           </form>
 
@@ -65,24 +65,24 @@
 <nav aria-label="Another pagination example">
     <ul class="pagination pagination-lg flex-wrap">
 
-        {% if posts.has_previous %}
+        {% if page_obj.has_previous %}
             <li class="page-item"> <a class="page-link" href="?page=1">{% translate 'First' %}</a></li>
-            <li class="page-item"> <a class="page-link" href="?page={{ posts.previous_page_number }}">{% translate 'previous' %}</a> </li> 
+            <li class="page-item"> <a class="page-link" href="?page={{ page_obj.previous_page_number }}">{% translate 'previous' %}</a> </li> 
         {% endif %}
 
-        {% for num in posts.paginator.page_range %}
+        {% for num in page_obj.paginator.page_range %}
 
-            {% if posts.number == num  %}
+            {% if page_obj.number == num  %}
             <li class="page-item active" aria-current="page"> <a class="page-link" href="?page={{ num }}">{{ num }}</a></li>
-            {% elif num > posts.number|add:'-2' and num < posts.number|add:'2' %}
+            {% elif num > page_obj.number|add:'-2' and num < page_obj.number|add:'2' %}
             <li class="page-item"> <a class="page-link"  href="?page={{ num }}">{{ num }}</a> </li>
             {% endif %}
 
             {% endfor %}
 
-        {% if posts.has_next %}
-            <li class="page-item"> <a class="page-link"  href="?page={{ posts.next_page_number }}">{% translate 'next' %}</a> </li>
-            <li class="page-item"> <a class="page-link"  href="?page={{ posts.paginator.num_pages }}">{% translate 'last' %} </a> </li>
+        {% if page_obj.has_next %}
+            <li class="page-item"> <a class="page-link"  href="?page={{ page_obj.next_page_number }}">{% translate 'next' %}</a> </li>
+            <li class="page-item"> <a class="page-link"  href="?page={{ page_obj.paginator.num_pages }}">{% translate 'last' %} </a> </li>
         {% endif %}
 
     </ul>

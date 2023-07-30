@@ -6,6 +6,7 @@ from authentication.tasks import send_welcome_email_task
 from django.conf import settings
 from .manager import CustomUserManager
 
+
 class CustomUser(AbstractBaseUser, PermissionsMixin):
 
     username = models.CharField(_('username'), max_length=50, unique=True)
@@ -25,8 +26,7 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
         to = (self.email,)
         send_welcome_email_task.apply_async(args=[subject, message, from_email, to],
                                             ignore_result=True,
-                                            queue='Bemail',
-                                            routing_key='Bemail'
+                                            queue='email',
+                                            routing_key='email'
                                              )
     
-
