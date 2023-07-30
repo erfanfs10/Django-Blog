@@ -3,6 +3,7 @@ from django.utils.translation import gettext_lazy as _
 from PIL import Image
 from authentication.models import CustomUser
 
+
 class Profile(models.Model):
 
     user = models.OneToOneField(CustomUser, on_delete=models.CASCADE, related_name='profile', verbose_name=_('user'))
@@ -43,6 +44,8 @@ class Post(models.Model):
     class Meta:
         verbose_name = _('post')
         verbose_name_plural = _('posts')
+        ordering = ('-created_time',)
+
 
     def __str__(self):
         return f'{self.user}--{self.title}--'

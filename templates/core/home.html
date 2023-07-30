@@ -6,7 +6,7 @@
 <br>
 <div style="display: inline-block;">
     <div style="display: inline-block; margin-right: 10px;">
-        <h3>{% translate 'Home Page' %}</h3> 
+        <h3><a href="{% url 'home' %}">{% translate 'Home Page' %}</a></h3> 
     </div>
     <div style="display: inline-block; margin-right: 10px;">
 
@@ -16,10 +16,10 @@
 
     </div>
     <div style="display: inline-block; margin-right: 10px;">
-        <h5><a href="?q=like" >{% translate 'sort by like' %}</a></h5>  
+        <h5><a href="?q=-like" >{% translate 'sort by like' %}</a></h5>  
     </div>
     <div style="display: inline-block; margin-right: 10px;">
-        <h5><a href="?q=new" >{% translate 'sort by newest' %}</a></h5> 
+        <h5><a href="?q=created_time" >{% translate 'sort by oldest' %}</a></h5> 
     </div>
 </div>
 

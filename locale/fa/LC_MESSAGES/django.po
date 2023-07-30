@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-05-14 20:01+0000\n"
+"POT-Creation-Date: 2023-07-30 11:51+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -28,13 +28,13 @@ msgstr "این ایمیل وجود دارد"
 msgid "A user with that username already exists."
 msgstr "این ایمیل وجود دارد"
 
-#: authentication/models.py:9
+#: authentication/models.py:12
 #, fuzzy
 #| msgid "user"
 msgid "username"
 msgstr "نام کاربری"
 
-#: authentication/models.py:10
+#: authentication/models.py:13
 msgid "Email"
 msgstr "ایمیل"
 
@@ -48,61 +48,62 @@ msgstr "%(user)s با موفقیت وارد شدید خوشامدید  "
 msgid "registration was successfull welcome %(user)s"
 msgstr "%(user)s  حساب شما با موفقیت ساخته شد "
 
-#: blog/settings.py:124
+#: blog/settings.py:125
 msgid "Persian"
 msgstr ""
 
-#: blog/settings.py:125
+#: blog/settings.py:126
 msgid "English"
 msgstr ""
 
-#: core/models.py:8 core/models.py:36 core/models.py:53
+#: core/models.py:9 core/models.py:37 core/models.py:56
 msgid "user"
 msgstr "کاربر"
 
-#: core/models.py:9
+#: core/models.py:10
 msgid "bio"
 msgstr "توضیحات"
 
-#: core/models.py:10
+#: core/models.py:11
 msgid "image"
 msgstr "تصویر"
 
-#: core/models.py:16
+#: core/models.py:17
 msgid "profile"
 msgstr "پروفایل"
 
-#: core/models.py:17
+#: core/models.py:18
 msgid "profiles"
 msgstr " پروفایل ها"
 
-#: core/models.py:37
+#: core/models.py:38
 msgid "title"
 msgstr "عنوان"
 
-#: core/models.py:38
+#: core/models.py:39
 msgid "content"
 msgstr "محتوا"
 
-#: core/models.py:44 core/models.py:54
+#: core/models.py:45 core/models.py:57
 msgid "post"
 msgstr "پست"
 
-#: core/models.py:45
+#: core/models.py:46
 msgid "posts"
 msgstr "پست ها"
 
-#: core/models.py:60
+#: core/models.py:63
 msgid "like"
 msgstr "پسندیده"
 
-#: core/models.py:61 templates/core/home.html:46 templates/core/home.html:50
+#: core/models.py:64 templates/core/home.html:46 templates/core/home.html:50
 #: templates/core/home.html:54 templates/core/post.html:27
 #: templates/core/post.html:31 templates/core/post.html:35
 #: templates/core/post_like.html:29 templates/core/post_like.html:31
+#: templates/core/search.html:29 templates/core/search.html:31
 #: templates/core/user_profile.html:29 templates/core/user_profile.html:33
-#: templates/core/user_profile.html:37 templates/core/your_post.html:28
-#: templates/core/your_post.html:30
+#: templates/core/user_profile.html:37 templates/core/your_post.html:27
+#: templates/core/your_post.html:29
 msgid "likes"
 msgstr "پسندیده ها"
 
@@ -142,8 +143,8 @@ msgid "logout"
 msgstr "خارج شدن"
 
 #: templates/authentication/logout.html:12 templates/core/post.html:7
-#: templates/core/post_like.html:6 templates/core/user_profile.html:7
-#: templates/core/your_post.html:6
+#: templates/core/post_like.html:6 templates/core/search.html:6
+#: templates/core/user_profile.html:7 templates/core/your_post.html:6
 msgid "back to home"
 msgstr "برگشت به خانه"
 
@@ -270,11 +271,12 @@ msgid "sort by like"
 msgstr "بر اساس پسند ها"
 
 #: templates/core/home.html:22
-msgid "sort by newest"
-msgstr " بر اساس جدیدترین ها"
+msgid "sort by oldest"
+msgstr " بر اساس قدیمی ترین ها"
 
 #: templates/core/home.html:40 templates/core/post_like.html:23
-#: templates/core/user_profile.html:23 templates/core/your_post.html:22
+#: templates/core/search.html:23 templates/core/user_profile.html:23
+#: templates/core/your_post.html:21
 msgid "See More"
 msgstr "ادامه"
 
@@ -284,8 +286,8 @@ msgid "login first"
 msgstr "وارد شوید"
 
 #: templates/core/home.html:58 templates/core/post.html:39
-#: templates/core/post_like.html:33 templates/core/user_profile.html:41
-#: templates/core/your_post.html:32
+#: templates/core/post_like.html:33 templates/core/search.html:33
+#: templates/core/user_profile.html:41 templates/core/your_post.html:31
 msgid "ago"
 msgstr "پیش"
 
@@ -294,18 +296,22 @@ msgid "There is no post yet!"
 msgstr "پستی وجود ندارد"
 
 #: templates/core/home.html:69 templates/core/post_like.html:44
+#: templates/core/search.html:44 templates/core/your_post.html:44
 msgid "First"
 msgstr "اولین"
 
 #: templates/core/home.html:70 templates/core/post_like.html:45
+#: templates/core/search.html:45 templates/core/your_post.html:45
 msgid "previous"
 msgstr "قبلی"
 
 #: templates/core/home.html:84 templates/core/post_like.html:59
+#: templates/core/search.html:59 templates/core/your_post.html:59
 msgid "next"
 msgstr "بعدی"
 
 #: templates/core/home.html:85 templates/core/post_like.html:60
+#: templates/core/search.html:60 templates/core/your_post.html:60
 msgid "last"
 msgstr "آخرین"
 
@@ -335,6 +341,15 @@ msgstr "پست هایی که پسندیده اید"
 msgid "You did not like any post"
 msgstr "شما پستی را نپسندیدین"
 
+#: templates/core/search.html:6
+#| msgid "Search"
+msgid "Your Search"
+msgstr  "جست و جوی شما"
+
+#: templates/core/search.html:36
+msgid "No Post Found"
+msgstr "پستی یافت نشد"
+
 #: templates/core/update_post.html:10
 msgid "update"
 msgstr "تغییر"
@@ -348,17 +363,17 @@ msgstr "پست های شما"
 msgid " you have %(count)s posts "
 msgstr "شما %(count)s پست دارید "
 
-#: templates/core/your_post.html:33
+#: templates/core/your_post.html:32
 #, fuzzy
 #| msgid "Update you post"
 msgid "Update your post"
 msgstr "تغییر پست"
 
-#: templates/core/your_post.html:34
+#: templates/core/your_post.html:33
 msgid "Delete your post"
 msgstr "حذف پست"
 
-#: templates/core/your_post.html:37
+#: templates/core/your_post.html:36
 msgid "Add New One"
 msgstr "پست جدید"
 
@@ -410,4 +425,3 @@ msgstr "اعمال"
 #, python-format
 msgid " currnet language : %(lan)s "
 msgstr "زبان فعلی : %(lan)s"
-

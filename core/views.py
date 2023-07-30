@@ -1,8 +1,7 @@
-from django.db.models.query import QuerySet
 from django.db.models import Count, Q
 from django.shortcuts import render, redirect
 from django.urls import reverse_lazy
-from django.http import Http404, HttpResponse
+from django.http import Http404
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic import DeleteView, UpdateView, ListView, CreateView
@@ -12,7 +11,6 @@ from core.forms import PostForm, ProfileForm
 
 
 class Home(ListView):
-    model = Post
     template_name = "core/home.html"
     paginate_by = 6
     context_object_name = "posts"
@@ -33,7 +31,6 @@ class Home(ListView):
 
 
 class Search(ListView):
-    model = Post
     template_name = "core/search.html"
     paginate_by = 6
     context_object_name = "posts"
@@ -88,7 +85,6 @@ class PostAdd(LoginRequiredMixin, CreateView):
     
 
 class PostLike(LoginRequiredMixin, ListView):
-    model = Post
     paginate_by = 6
     context_object_name = "posts"
     template_name = "core/post_like.html"
@@ -121,34 +117,36 @@ class ProfileUpdate(LoginRequiredMixin, View):
         return render(request, 'core/edit_profile.html', {'form': form})
 
 
-def user_profile(request, userid):
+class ProfileUser(ListView):
+    template_name = 'core/user_profile.html'
+    paginate_by = 6
+    context_object_name = "posts"
 
-    posts = Post.objects.select_related('user__profile').annotate(like=Count('likess__id')).filter(user=userid)
+    def get_queryset(self):
+        posts = Post.objects.select_related('user__profile').annotate(like=Count('likess__id')).filter(
+            user=self.kwargs['pk']).order_by("-created_time")
+        return posts
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        if self.request.user.is_authenticated:
+            like = Like.objects.filter(user=self.request.user).values_list('post_id', flat=True)
+        else:
+            like = None
+        context["like"] = like
+        return context    
+
+
+class PostDetail(View):
     
-    if request.user.is_authenticated:
+    def get(self, request, pk):
+        post = Post.objects.annotate(like=Count('likess__id')).filter(pk=pk).first()
 
-        like = Like.objects.filter(user=request.user).values_list('post_id', flat=True)
-    else:        
-        like = None
-
-    context = {
-        'posts': posts,
-        'like': like,
-    }
-
-    return render(request, 'core/user_profile.html', context=context)
-
-
-def post_view(request, postid):
-
-    post = Post.objects.annotate(like=Count('likess__id')).filter(pk=postid).first()
-
-    if request.user.is_authenticated:
-        like = Like.objects.filter(user=request.user, post=postid)
-    else:        
-        like = None
-   
-    return render(request, 'core/post.html', {'post': post, 'like':like})
+        if request.user.is_authenticated:
+            like = Like.objects.filter(user=request.user, post=pk)
+        else:        
+            like = None
+        return render(request, 'core/post.html', {'post': post, 'like':like})
 
 
 @login_required()
@@ -160,7 +158,6 @@ def delete_image(request):
 
 
 class MyPost(LoginRequiredMixin, ListView):
-    model = Post
     paginate_by = 6
     template_name = "core/your_post.html"
     context_object_name = "posts"
@@ -188,3 +185,4 @@ class PostDelete(LoginRequiredMixin, DeleteView):
     model = Post
     template_name = "core/delete_post.html"
     success_url = reverse_lazy("your-post")
+    
