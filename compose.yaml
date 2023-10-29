@@ -2,7 +2,7 @@ services:
 
     blog:
       build: . 
-      container_name: django  
+      container_name: blog  
       restart: always
       command: bash entrypoint.sh
       volumes:
