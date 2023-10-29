@@ -1,6 +1,6 @@
 services:
 
-    django:
+    blog:
       build: . 
       container_name: django  
       restart: always
@@ -15,7 +15,7 @@ services:
       depends_on:
         - redis  
         
-    redis:
+    redis_blog:
       image: redis:7.0-bookworm
       container_name: redis  
       restart: always
