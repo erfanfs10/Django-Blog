@@ -17,7 +17,7 @@ services:
         
     redis_blog:
       image: redis:7.0-bookworm
-      container_name: redis  
+      container_name: redis_blog  
       restart: always
 
 
