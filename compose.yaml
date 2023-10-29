@@ -1,0 +1,25 @@
+services:
+
+    django:
+      build: . 
+      container_name: django  
+      restart: always
+      command: bash entrypoint.sh
+      volumes:
+        - .:/app
+        - static:/app/static
+      ports:
+        - 8000:8000
+      env_file:
+        - .env
+      depends_on:
+        - redis  
+        
+    redis:
+      image: redis:7.0-bookworm
+      container_name: redis  
+      restart: always
+
+
+volumes:
+  static:    

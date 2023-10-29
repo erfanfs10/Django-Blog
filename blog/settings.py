@@ -13,7 +13,7 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 from pathlib import Path
 from django.utils.translation import gettext_lazy as _
 from kombu import Queue, Exchange
-from .local_setting import SECRET_KEY, DEBUG, EMAIL, APP_PASSWORD, ALLOWED_HOSTS
+import os
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -22,13 +22,12 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = SECRET_KEY
+SECRET_KEY = "jkhvbrh8789348*(()78902u845*/-+98398u76^%%$*#*Hjbcdl'`;;)"
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = DEBUG 
+DEBUG = bool(int(os.environ.get("DEBUG", "1")))
 
-ALLOWED_HOSTS = ALLOWED_HOSTS
-
+ALLOWED_HOSTS = ["*"] if DEBUG else os.environ.get("ALLOWED_HOSTS").split(",")
 
 # Application definition
 
@@ -91,7 +90,7 @@ DATABASES = {
 CACHES = {
     "default": {
         "BACKEND": "django_redis.cache.RedisCache",
-        "LOCATION": "redis://127.0.0.1:6379",
+        "LOCATION": os.environ.get("CACHE_LOCATION", "redis://127.0.0.1:6379"),
         "KEY_PREFIX": "blog"        
 
     }
@@ -161,14 +160,13 @@ CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_HOST_USER = EMAIL
-EMAIL_HOST_PASSWORD = APP_PASSWORD 
+EMAIL_HOST_USER = "your email"
+EMAIL_HOST_PASSWORD = "your email password" 
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 
 
-CELERY_BROKER_URL = 'redis://localhost:6379'
-CELERY_TIMEZONE = "Asia/Tehran"
+CELERY_BROKER_URL = os.environ.get("CACHE_LOCATION", "redis://127.0.0.1:6379")
 CELERY_TASK_TIME_LIMIT = 30 * 60
 
 email_exchange = Exchange('email', type='direct')
