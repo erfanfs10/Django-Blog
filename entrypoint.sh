@@ -8,7 +8,7 @@ create_superuser() {
 from authentication.models import CustomUser
 from django.db.utils import IntegrityError
 try:
-    CustomUser.objects.create_superuser(username='mahdi', email='mahdi.mahdi@gmail.com', password='erfan852')
+    CustomUser.objects.create_superuser(username='user1', email='useremail@gmail.com', password='example123')
     print("User created successfully!")
 except IntegrityError:
     print("This user is already exist!")

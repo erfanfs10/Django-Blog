@@ -8,8 +8,7 @@ services:
       volumes:
         - .:/app
         - static:/app/static
-      ports:
-        - 8001:8001
+        - media:/app/media
       env_file:
         - .env
       depends_on:
@@ -20,6 +19,19 @@ services:
       container_name: redis_blog  
       restart: always
 
+    nginx_blog:
+      build: ./nginx
+      container_name: "nginx_blog"
+      restart: always
+      volumes:
+        - static:/app/static
+        - media:/app/media
+      ports:
+        - 8001:80
+      depends_on:
+        - blog  
+
 
 volumes:
   static:    
+  media:

@@ -27,7 +27,7 @@ SECRET_KEY = "jkhvbrh8789348*(()78902u845*/-+98398u76^%%$*#*Hjbcdl'`;;)"
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = bool(int(os.environ.get("DEBUG", "1")))
 
-ALLOWED_HOSTS = ["*"] if DEBUG else os.environ.get("ALLOWED_HOSTS").split(",")
+ALLOWED_HOSTS = ["*"] #if DEBUG else os.environ.get("ALLOWED_HOSTS").split(",")
 
 # Application definition
 
@@ -137,10 +137,10 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
 
-STATIC_URL = 'blog/static/'
+STATIC_URL = '/static/'
 STATIC_ROOT =  BASE_DIR / 'static'
 
-MEDIA_URL = 'blog/media/'
+MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media'
 
 LOCALE_PATHS = (
